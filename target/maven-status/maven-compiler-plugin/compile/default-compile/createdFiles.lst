@@ -1,2 +1,8 @@
-com\mycompany\laptopstore\resources\JakartaEE10Resource.class
-com\mycompany\laptopstore\JakartaRestConfiguration.class
+Model\Laptop.class
+Config\MyWebAppInitializer.class
+Config\WebConfig.class
+Controller\LaptopController.class
+Repository\LaptopRepository.class
+Service\LaptopService.class
+Controller\HomeController.class
+Config\DatabaseConfig.class
