@@ -4,5 +4,12 @@ D:\lop\ki4\code\PRJ_301\LaptopStore\src\main\java\Config\WebConfig.java
 D:\lop\ki4\code\PRJ_301\LaptopStore\src\main\java\Controller\HomeController.java
 D:\lop\ki4\code\PRJ_301\LaptopStore\src\main\java\Controller\LaptopController.java
 D:\lop\ki4\code\PRJ_301\LaptopStore\src\main\java\Model\Laptop.java
+D:\lop\ki4\code\PRJ_301\LaptopStore\src\main\java\Model\Order.java
+D:\lop\ki4\code\PRJ_301\LaptopStore\src\main\java\Model\OrderDetail.java
+D:\lop\ki4\code\PRJ_301\LaptopStore\src\main\java\Model\User.java
+D:\lop\ki4\code\PRJ_301\LaptopStore\src\main\java\Model\UserLoginDTO.java
 D:\lop\ki4\code\PRJ_301\LaptopStore\src\main\java\Repository\LaptopRepository.java
+D:\lop\ki4\code\PRJ_301\LaptopStore\src\main\java\Repository\UserRepository.java
 D:\lop\ki4\code\PRJ_301\LaptopStore\src\main\java\Service\LaptopService.java
+D:\lop\ki4\code\PRJ_301\LaptopStore\src\main\java\Utils\GenderEnum.java
+D:\lop\ki4\code\PRJ_301\LaptopStore\src\main\java\Utils\RoleEnum.java

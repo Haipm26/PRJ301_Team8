@@ -6,6 +6,7 @@ package Service;
 
 import Model.Laptop;
 import Repository.LaptopRepository;
+import java.util.List;
 import org.springframework.stereotype.Service;
 
 /**
@@ -22,6 +23,22 @@ public class LaptopService {
     }
     
     public void handleCreateLaptop(Laptop laptop){
+        this.laptopRepository.save(laptop);
+    }
+    
+    public List<Laptop> handleGetAllLaptops() {
+        return this.laptopRepository.findAll();
+    }
+
+    public Laptop handleGetLaptopById(Long id) {
+        return this.laptopRepository.findById(id).orElse(null);
+    }
+
+    public void handleDeleteLaptop(Long id) {
+        this.laptopRepository.deleteById(id);
+    }
+
+    public void handleUpdateLaptop(Laptop laptop) {
         this.laptopRepository.save(laptop);
     }
 }

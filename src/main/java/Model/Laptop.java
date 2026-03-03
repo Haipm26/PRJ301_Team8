@@ -25,20 +25,22 @@ public class Laptop {
     private String brand;
     private double price;
     private String cpu;
-    private int ram;
+    private String ram;
     private String storage;
     private String color;
+    
+    @Column(columnDefinition = "nvarchar(MAX)")
     private String image;
     // san pham noi bat va san pham moi de filter
     private boolean isFeatured;
     private boolean isNewArrival;
-
-    public Laptop() {
-    }
     
     @Column(columnDefinition = "nvarchar(MAX)")
     private String description;
-
+    
+    public Laptop() {
+    }
+    
     public String getStorage() {
         return storage;
     }
@@ -87,11 +89,11 @@ public class Laptop {
         this.cpu = cpu;
     }
 
-    public int getRam() {
+    public String getRam() {
         return ram;
     }
 
-    public void setRam(int ram) {
+    public void setRam(String ram) {
         this.ram = ram;
     }
 
@@ -114,6 +116,7 @@ public class Laptop {
     public boolean isIsFeatured() {
         return isFeatured;
     }
+    
 
     public void setIsFeatured(boolean isFeatured) {
         this.isFeatured = isFeatured;

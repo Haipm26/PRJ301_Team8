@@ -30,4 +30,5 @@ public class HomeController {
         
         return "index"; // Looks for /WEB-INF/views/index.jsp
     }
+    
 }

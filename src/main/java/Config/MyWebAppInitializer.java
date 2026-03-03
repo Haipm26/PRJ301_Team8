@@ -4,6 +4,8 @@
  */
 package Config;
 
+import jakarta.servlet.MultipartConfigElement;
+import jakarta.servlet.ServletRegistration;
 import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer;
 
 /**
@@ -28,5 +30,17 @@ public class MyWebAppInitializer extends AbstractAnnotationConfigDispatcherServl
     protected String[] getServletMappings() {
         // Handle all requests starting from the root "/"
         return new String[] { "/" };
+    }
+    
+    @Override
+    protected void customizeRegistration(ServletRegistration.Dynamic registration) {
+        registration.setMultipartConfig(
+            new MultipartConfigElement(
+                null,
+                5000000,
+                5000000 * 2,
+                0
+            )
+        );
     }
 }

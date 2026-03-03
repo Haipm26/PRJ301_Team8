@@ -1,8 +1,15 @@
-Model\Laptop.class
 Config\MyWebAppInitializer.class
 Config\WebConfig.class
+Model\OrderDetail.class
 Controller\LaptopController.class
+Model\Order.class
 Repository\LaptopRepository.class
-Service\LaptopService.class
 Controller\HomeController.class
+Model\UserLoginDTO.class
+Model\Laptop.class
+Model\User.class
+Utils\RoleEnum.class
+Utils\GenderEnum.class
+Service\LaptopService.class
 Config\DatabaseConfig.class
+Repository\UserRepository.class
