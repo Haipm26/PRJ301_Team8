@@ -1,3 +1,4 @@
+Controller\StatisticsController.class
 Config\MyWebAppInitializer.class
 Config\WebConfig.class
 Model\OrderDetail.class
@@ -5,11 +6,16 @@ Controller\LaptopController.class
 Model\Order.class
 Repository\LaptopRepository.class
 Controller\HomeController.class
+Service\StatisticsService.class
+Controller\UserController.class
 Model\UserLoginDTO.class
 Model\Laptop.class
 Model\User.class
+Service\UserService.class
 Utils\RoleEnum.class
+Controller\AuthController.class
 Utils\GenderEnum.class
 Service\LaptopService.class
+Repository\StatisticsRepository.class
 Config\DatabaseConfig.class
 Repository\UserRepository.class
