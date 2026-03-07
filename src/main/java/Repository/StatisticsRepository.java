@@ -2,6 +2,7 @@ package Repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 import Model.Laptop;
 import java.util.List;
@@ -23,6 +24,15 @@ public interface StatisticsRepository extends JpaRepository<Laptop, Long> {
 
     @Query("SELECT COUNT(l) FROM Laptop l")
     Long findCount();
+
+    @Query("SELECT DISTINCT l.brand FROM Laptop l WHERE l.brand IS NOT NULL")
+    List<String> findAllBrands();
+
+    @Query("SELECT l FROM Laptop l WHERE l.brand = :brand ORDER BY l.price DESC")
+    List<Laptop> findByBrandOrderByPriceDesc(@Param("brand") String brand);
+
+    @Query("SELECT l FROM Laptop l WHERE l.brand = :brand ORDER BY l.price ASC")
+    List<Laptop> findByBrandOrderByPriceAsc(@Param("brand") String brand);
 
     @Query("SELECT l.brand, COUNT(l), MAX(l.price), MIN(l.price), AVG(l.price) FROM Laptop l GROUP BY l.brand ORDER BY AVG(l.price) DESC")
     List<Object[]> findStatsByBrand();
