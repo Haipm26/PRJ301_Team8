@@ -56,23 +56,46 @@
 
                 /* Hero Section */
                 .hero {
-                    background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+                    background: linear-gradient(45deg, #0d6efd, #0dcaf0);
                     color: white;
                     padding: 80px 0;
-                    text-align: center;
                     border-bottom-left-radius: 50px;
                     border-bottom-right-radius: 50px;
                     margin-bottom: 40px;
+                    position: relative;
+                    overflow: hidden;
+                }
+
+                .floating-laptop {
+                    animation: float 4s ease-in-out infinite;
+                    max-width: 100%;
+                    height: auto;
+                    filter: drop-shadow(0 20px 30px rgba(0, 0, 0, 0.3));
+                }
+
+                @keyframes float {
+                    0% {
+                        transform: translateY(0px) rotate(0deg);
+                    }
+
+                    50% {
+                        transform: translateY(-15px) rotate(-2deg);
+                    }
+
+                    100% {
+                        transform: translateY(0px) rotate(0deg);
+                    }
                 }
 
                 .hero h1 {
                     font-weight: 800;
-                    font-size: 3rem;
+                    font-size: 3.5rem;
                     margin-bottom: 20px;
+                    text-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
                 }
 
                 .hero p {
-                    font-size: 1.2rem;
+                    font-size: 1.25rem;
                     opacity: 0.9;
                 }
 
@@ -233,14 +256,13 @@
                                     </li>
                                 </c:when>
                                 <c:otherwise>
-                                    <li class="nav-item">
-                                        <a class="nav-link btn btn-outline-primary ms-2 px-3 rounded-pill"
-                                            style="border-width:2px; font-weight:700;"
+                                    <li class="nav-item d-flex align-items-center">
+                                        <a class="btn btn-outline-primary ms-2 px-4 rounded-pill fw-bold"
+                                            style="border-width:2px;"
                                             href="${pageContext.request.contextPath}/login">Login</a>
                                     </li>
-                                    <li class="nav-item">
-                                        <a class="nav-link btn btn-primary ms-2 px-3 rounded-pill text-white"
-                                            style="font-weight:700;"
+                                    <li class="nav-item d-flex align-items-center">
+                                        <a class="btn btn-primary ms-2 px-4 rounded-pill text-white fw-bold shadow-sm"
                                             href="${pageContext.request.contextPath}/register">Register</a>
                                     </li>
                                 </c:otherwise>
@@ -253,13 +275,24 @@
             <!-- Hero Section -->
             <div class="hero">
                 <div class="container">
-                    <h1>Discover Your Perfect Machine</h1>
-                    <p>High-performance laptops for gaming, professionals, and students. Unbeatable prices and quality.
-                    </p>
+                    <div class="row align-items-center">
+                        <div class="col-md-6 text-md-start text-center mb-5 mb-md-0">
+                            <h1>Discover Your Perfect Machine</h1>
+                            <p class="lead mb-4">High-performance laptops for gaming, professionals, and students.
+                                Unbeatable prices and quality.</p>
+                            <a href="#products-section"
+                                class="btn btn-light btn-lg rounded-pill fw-bold text-primary shadow px-5">Explore
+                                Now</a>
+                        </div>
+                        <div class="col-md-6 text-center">
+                            <img src="${pageContext.request.contextPath}/resources/img/hero-laptop.png"
+                                alt="Premium Laptop" class="img-fluid floating-laptop">
+                        </div>
+                    </div>
                 </div>
             </div>
 
-            <div class="container">
+            <div class="container" id="products-section">
 
                 <!-- Search and Filter Section -->
                 <div class="filter-section">

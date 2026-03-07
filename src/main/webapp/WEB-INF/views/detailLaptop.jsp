@@ -172,8 +172,8 @@
                             <div class="input-group">
                                 <input class="form-control border-primary" type="search" name="keyword"
                                     placeholder="Search laptops..." value="${keyword}">
-                                <button class="btn btn-primary" type="submit">
-                                    <i class="bi bi-search"></i>
+                                <button class="btn btn-primary px-3 fw-bold" type="submit">
+                                    <i class="bi bi-search me-1"></i>Search
                                 </button>
                             </div>
                         </form>
@@ -182,7 +182,7 @@
                             <li class="nav-item">
                                 <a class="nav-link" href="${pageContext.request.contextPath}/">Home</a>
                             </li>
-                            <li class="nav-item">
+                            <li class="nav-item me-2">
                                 <a class="nav-link" href="${pageContext.request.contextPath}/cart">
                                     <i class="bi bi-cart3 fs-5"></i> Cart
                                 </a>
@@ -207,14 +207,13 @@
                                     </li>
                                 </c:when>
                                 <c:otherwise>
-                                    <li class="nav-item">
-                                        <a class="nav-link btn btn-outline-primary ms-3 px-3 rounded-pill"
-                                            style="border-width:2px; font-weight:700;"
+                                    <li class="nav-item d-flex align-items-center ms-2">
+                                        <a class="btn btn-outline-primary px-4 rounded-pill fw-bold"
+                                            style="border-width:2px;"
                                             href="${pageContext.request.contextPath}/login">Login</a>
                                     </li>
-                                    <li class="nav-item">
-                                        <a class="nav-link btn btn-primary ms-2 px-3 rounded-pill text-white"
-                                            style="font-weight:700;"
+                                    <li class="nav-item d-flex align-items-center ms-2">
+                                        <a class="btn btn-primary px-4 rounded-pill fw-bold text-white shadow-sm"
                                             href="${pageContext.request.contextPath}/register">Register</a>
                                     </li>
                                 </c:otherwise>
