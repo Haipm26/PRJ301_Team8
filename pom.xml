@@ -5,7 +5,7 @@
     <artifactId>LaptopStore</artifactId>
     <version>1.0-SNAPSHOT</version>
     <packaging>war</packaging>
-    <name>LaptopStore-1.0-SNAPSHOT</name>
+    <name>TrialPRJ301LaptopShop</name>
     
     <properties>
         <maven.compiler.release>17</maven.compiler.release>
