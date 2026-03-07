@@ -19,18 +19,17 @@ import org.springframework.stereotype.Repository;
  */
 @Repository
 public interface LaptopRepository extends JpaRepository<Laptop, Long> {
+
     List<Laptop> findByIsFeaturedTrue();
 
     List<Laptop> findByIsNewArrivalTrue();
 
     List<Laptop> findByBrand(String brand);
 
-    // Pagination and Sort
-    Page<Laptop> findAll(Pageable pageable);
-
+    // Pagination and Sort handled automatically by JpaRepository
     // Search by criteria (name, brand, color)
-    @Query("SELECT l FROM Laptop l WHERE LOWER(l.name) LIKE LOWER(CONCAT('%', :keyword, '%')) " +
-            "OR LOWER(l.brand) LIKE LOWER(CONCAT('%', :keyword, '%')) " +
-            "OR LOWER(l.color) LIKE LOWER(CONCAT('%', :keyword, '%'))")
+    @Query("SELECT l FROM Laptop l WHERE LOWER(l.name) LIKE LOWER(CONCAT('%', :keyword, '%')) "
+            + "OR LOWER(l.brand) LIKE LOWER(CONCAT('%', :keyword, '%')) "
+            + "OR LOWER(l.color) LIKE LOWER(CONCAT('%', :keyword, '%'))")
     Page<Laptop> searchLaptops(@Param("keyword") String keyword, Pageable pageable);
 }

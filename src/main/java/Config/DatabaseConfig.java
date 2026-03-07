@@ -17,8 +17,6 @@ import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
 import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
-
-
 /**
  *
  * @author Pham Minh Hai
@@ -32,7 +30,8 @@ public class DatabaseConfig {
     public DataSource dataSource() {
         DriverManagerDataSource dataSource = new DriverManagerDataSource();
         dataSource.setDriverClassName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
-        dataSource.setUrl("jdbc:sqlserver://localhost:1433;databaseName=LaptopShopDB;encrypt=true;trustServerCertificate=true");
+        dataSource.setUrl(
+                "jdbc:sqlserver://localhost:1433;databaseName=LaptopShopDB;encrypt=true;trustServerCertificate=true");
         dataSource.setUsername("sa"); // Use your SQL Server username
         dataSource.setPassword("123"); // Use your SQL Server password
         return dataSource;

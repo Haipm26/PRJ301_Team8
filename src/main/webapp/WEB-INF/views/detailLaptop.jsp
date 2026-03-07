@@ -183,8 +183,16 @@
                                 <a class="nav-link" href="${pageContext.request.contextPath}/">Home</a>
                             </li>
                             <li class="nav-item me-2">
-                                <a class="nav-link" href="${pageContext.request.contextPath}/cart">
+                                <a class="nav-link position-relative" href="${pageContext.request.contextPath}/cart">
                                     <i class="bi bi-cart3 fs-5"></i> Cart
+                                    <c:if test="${not empty sessionScope.cartCount and sessionScope.cartCount > 0}">
+                                        <span
+                                            class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger"
+                                            style="margin-left: -15px; margin-top: 10px;">
+                                            ${sessionScope.cartCount}
+                                            <span class="visually-hidden">items in cart</span>
+                                        </span>
+                                    </c:if>
                                 </a>
                             </li>
                             <c:choose>

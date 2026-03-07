@@ -25,6 +25,7 @@ import org.springframework.web.multipart.MultipartFile;
  */
 @Controller
 public class LaptopController {
+
     private LaptopService laptopService;
 
     public LaptopController(LaptopService laptopService) {

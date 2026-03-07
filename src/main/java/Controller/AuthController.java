@@ -9,5 +9,5 @@ package Controller;
  * @author Pham Minh Hai
  */
 public class AuthController {
-    
+
 }
