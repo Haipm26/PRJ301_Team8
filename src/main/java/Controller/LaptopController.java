@@ -32,6 +32,13 @@ public class LaptopController {
         this.laptopService = laptopService;
     }
 
+    @GetMapping("/laptops/manage")
+    public String getManagePage(Model model) {
+        java.util.List<Laptop> laptops = this.laptopService.handleGetAllLaptops();
+        model.addAttribute("laptops", laptops);
+        return "manageLaptops";
+    }
+
     @PostMapping("/laptops")
     public String createLaptop(
             @RequestParam("name") String name,
