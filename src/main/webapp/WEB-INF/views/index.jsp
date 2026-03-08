@@ -201,15 +201,16 @@
                             </a>
                         </li>
                         <c:choose>
-                            <c:when test="${not empty sessionScope.loggedInUser}">
+                            <c:when test="${not empty sessionScope.user}">
                                 <li class="nav-item dropdown">
                                     <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
-                                        <i class="bi bi-person-circle"></i> ${sessionScope.loggedInUser.name}
+                                        <i class="bi bi-person-circle"></i> ${sessionScope.user.name}
                                     </a>
                                     <ul class="dropdown-menu dropdown-menu-end">
                                         <li><a class="dropdown-item" href="${pageContext.request.contextPath}/profile">Profile</a></li>
+                                        <li><a class="dropdown-item" href="${pageContext.request.contextPath}/change-password">Change Password</a></li>
                                         <li><hr class="dropdown-divider"></li>
-                                        <li><a class="dropdown-item text-danger" href="${pageContext.request.contextPath}/auth/logout">Logout</a></li>
+                                        <li><a class="dropdown-item text-danger" href="${pageContext.request.contextPath}/logout">Logout</a></li>
                                     </ul>
                                 </li>
                             </c:when>
