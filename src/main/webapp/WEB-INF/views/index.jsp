@@ -8,6 +8,21 @@
 <html>
 <body>
     <h1>${message}</h1>
+    
+    <c:choose>
+        <c:when test="${not empty sessionScope.user}">
+            <%-- neu login roi --%>
+            <span>Welcome, ${sessionScope.user.name}!</span> | 
+            <a href="${pageContext.request.contextPath}/logout">Logout</a> |
+            <a href="${pageContext.request.contextPath}/change-password">Change your pass word</a>
+        </c:when>
+        <c:otherwise>
+            <%-- neu chua login --%>
+            <a href="${pageContext.request.contextPath}/login">Login</a> | 
+            <a href="${pageContext.request.contextPath}/register">Sign Up</a>
+        </c:otherwise>
+    </c:choose>
+    
     <hr>
     <h2>Our Laptops</h2>
     <form action="${pageContext.request.contextPath}/laptops" method="post" enctype="multipart/form-data">

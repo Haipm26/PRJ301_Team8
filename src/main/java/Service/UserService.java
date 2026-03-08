@@ -42,5 +42,16 @@ public class UserService {
     public void handleUpdateUser(User user) {
         this.userRepository.save(user);
     }
+    
+    public User handleLogin(String username, String password) {
+    // Find by username using the repository we discussed
+        User user = this.userRepository.findByUsername(username);
+
+        // Check if user exists and password matches (Hashing comes later!)
+        if (user != null && user.getPassword().equals(password)) {
+            return user;
+        }
+        return null;
+    }
 
 }
