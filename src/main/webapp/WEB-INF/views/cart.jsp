@@ -159,8 +159,8 @@
                                 <div class="input-group">
                                     <input class="form-control border-primary" type="search" name="keyword"
                                         placeholder="Search laptops..." value="${keyword}">
-                                    <button class="btn btn-primary px-3 fw-bold" type="submit">
-                                        <i class="bi bi-search me-1"></i>Search
+                                    <button class="btn btn-primary" type="submit">
+                                        <i class="bi bi-search"></i>
                                     </button>
                                 </div>
                             </form>
@@ -205,13 +205,13 @@
                                         </li>
                                     </c:when>
                                     <c:otherwise>
-                                        <li class="nav-item d-flex align-items-center ms-2">
-                                            <a class="btn btn-outline-primary px-4 rounded-pill fw-bold"
+                                        <li class="nav-item d-flex align-items-center">
+                                            <a class="btn btn-outline-primary ms-2 px-4 rounded-pill fw-bold"
                                                 style="border-width:2px;"
                                                 href="${pageContext.request.contextPath}/login">Login</a>
                                         </li>
-                                        <li class="nav-item d-flex align-items-center ms-2">
-                                            <a class="btn btn-primary px-4 rounded-pill fw-bold text-white shadow-sm"
+                                        <li class="nav-item d-flex align-items-center">
+                                            <a class="btn btn-primary ms-2 px-4 rounded-pill text-white fw-bold shadow-sm"
                                                 href="${pageContext.request.contextPath}/register">Register</a>
                                         </li>
                                     </c:otherwise>
