@@ -10,6 +10,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.ForeignKey;
 import jakarta.persistence.Table;
 
 /**
@@ -28,11 +29,11 @@ public class OrderDetail {
     private double price;
 
     @ManyToOne
-    @JoinColumn(name = "laptop_id")
+    @JoinColumn(name = "laptop_id", foreignKey = @ForeignKey(name = "FK_order_detail_laptop"))
     private Laptop laptop;
 
     @ManyToOne
-    @JoinColumn(name = "order_id")
+    @JoinColumn(name = "order_id", foreignKey = @ForeignKey(name = "FK_order_detail_order"))
     private Order order;
 
     public OrderDetail() {

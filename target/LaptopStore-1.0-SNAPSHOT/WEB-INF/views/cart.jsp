@@ -159,8 +159,8 @@
                                 <div class="input-group">
                                     <input class="form-control border-primary" type="search" name="keyword"
                                         placeholder="Search laptops..." value="${keyword}">
-                                    <button class="btn btn-primary px-3 fw-bold" type="submit">
-                                        <i class="bi bi-search me-1"></i>Search
+                                    <button class="btn btn-primary" type="submit">
+                                        <i class="bi bi-search"></i>
                                     </button>
                                 </div>
                             </form>
@@ -169,6 +169,7 @@
                                 <li class="nav-item">
                                     <a class="nav-link" href="${pageContext.request.contextPath}/">Home</a>
                                 </li>
+
                                 <li class="nav-item me-2">
                                     <a class="nav-link active position-relative"
                                         href="${pageContext.request.contextPath}/cart">
@@ -204,13 +205,13 @@
                                         </li>
                                     </c:when>
                                     <c:otherwise>
-                                        <li class="nav-item d-flex align-items-center ms-2">
-                                            <a class="btn btn-outline-primary px-4 rounded-pill fw-bold"
+                                        <li class="nav-item d-flex align-items-center">
+                                            <a class="btn btn-outline-primary ms-2 px-4 rounded-pill fw-bold"
                                                 style="border-width:2px;"
                                                 href="${pageContext.request.contextPath}/login">Login</a>
                                         </li>
-                                        <li class="nav-item d-flex align-items-center ms-2">
-                                            <a class="btn btn-primary px-4 rounded-pill fw-bold text-white shadow-sm"
+                                        <li class="nav-item d-flex align-items-center">
+                                            <a class="btn btn-primary ms-2 px-4 rounded-pill text-white fw-bold shadow-sm"
                                                 href="${pageContext.request.contextPath}/register">Register</a>
                                         </li>
                                     </c:otherwise>
@@ -268,7 +269,10 @@
                                                     <a href="${pageContext.request.contextPath}/laptops/${item.laptop.id}"
                                                         class="cart-item-title d-block">${item.laptop.name}</a>
                                                     <div class="text-muted small">${item.laptop.brand}</div>
-                                                    <div class="cart-item-price mt-2">$${item.laptop.price}</div>
+                                                    <div class="cart-item-price mt-2">$
+                                                        <fmt:formatNumber value="${item.laptop.price}"
+                                                            pattern="#,###" />
+                                                    </div>
                                                 </div>
 
                                                 <div class="mx-4">
@@ -285,7 +289,8 @@
                                                 </div>
 
                                                 <div class="fw-bold mx-4 text-end" style="width: 80px;">
-                                                    $${item.price}
+                                                    $
+                                                    <fmt:formatNumber value="${item.price}" pattern="#,###" />
                                                 </div>
 
                                                 <div>
@@ -308,7 +313,9 @@
 
                                 <div class="d-flex justify-content-between mb-3">
                                     <span class="text-muted">Subtotal</span>
-                                    <span class="fw-bold">$${totalAmount}</span>
+                                    <span class="fw-bold">$
+                                        <fmt:formatNumber value="${totalAmount}" pattern="#,###" />
+                                    </span>
                                 </div>
                                 <div class="d-flex justify-content-between mb-3">
                                     <span class="text-muted">Tax (0%)</span>
@@ -323,7 +330,9 @@
 
                                 <div class="d-flex justify-content-between mb-4 mt-3">
                                     <span class="fw-bold fs-5">Total</span>
-                                    <span class="fw-bold fs-4 text-info">$${totalAmount}</span>
+                                    <span class="fw-bold fs-4 text-info">$
+                                        <fmt:formatNumber value="${totalAmount}" pattern="#,###" />
+                                    </span>
                                 </div>
 
                                 <c:if test="${not empty cartItems}">
@@ -371,6 +380,13 @@
                         </div>
                     </div>
                 </footer>
+
+                <!-- Floating Admin Button -->
+                <a href="${pageContext.request.contextPath}/laptops/manage"
+                    class="btn btn-success rounded-pill fw-bold shadow-lg position-fixed bottom-0 end-0 m-4 z-3"
+                    style="font-family: 'Poppins', sans-serif;">
+                    <i class="bi bi-gear-fill me-2"></i> Manage Laptops
+                </a>
 
                 <!-- Bootstrap 5 JS Bundle -->
                 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>

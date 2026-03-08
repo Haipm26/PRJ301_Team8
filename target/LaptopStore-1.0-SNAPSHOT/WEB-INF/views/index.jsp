@@ -1,5 +1,6 @@
 <%@page contentType="text/html" pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="jakarta.tags.core" %>
+<%@ taglib prefix="fmt" uri="jakarta.tags.fmt" %>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -186,11 +187,11 @@
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="${pageContext.request.contextPath}/statistics" style="white-space: nowrap;">
-                                <i class="bi bi-bar-chart-fill"></i> Thống kê
+                                <i class="bi bi-bar-chart-fill"></i> Statistics
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link position-relative" href="${pageContext.request.contextPath}/cart">
+                            <a class="nav-link position-relative" href="${pageContext.request.contextPath}/cart" style="white-space: nowrap;">
                                 <i class="bi bi-cart3 fs-5"></i> Cart
                                 <c:if test="${not empty sessionScope.cartCount and sessionScope.cartCount > 0}">
                                     <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger" style="margin-left: -15px; margin-top: 10px;">
@@ -295,16 +296,13 @@
                                 <div class="card-body d-flex flex-column">
                                     <div class="text-muted small mb-1">${l.brand}</div>
                                     <h5 class="product-title">${l.name}</h5>
-                                    <div class="product-price mt-auto">$${l.price}</div>
+                                    <div class="product-price mt-auto">$<fmt:formatNumber value="${l.price}" pattern="#,###" /></div>
                                     <a href="${pageContext.request.contextPath}/laptops/${l.id}" class="btn btn-outline-dark mt-3 rounded-pill btn-sm">View Details</a>
                                     <div class="d-flex gap-2 mt-2">
-                                        <a href="${pageContext.request.contextPath}/laptops/update/${l.id}" 
-                                           class="btn btn-warning btn-sm rounded-pill w-50">
+                                        <a href="${pageContext.request.contextPath}/laptops/update/${l.id}" class="btn btn-warning btn-sm rounded-pill w-50">
                                             <i class="bi bi-pencil-fill"></i> Edit
                                         </a>
-                                        <a href="${pageContext.request.contextPath}/laptops/delete/${l.id}" 
-                                           class="btn btn-danger btn-sm rounded-pill w-50"
-                                           onclick="return confirm('Are you sure?')">
+                                        <a href="${pageContext.request.contextPath}/laptops/delete/${l.id}" class="btn btn-danger btn-sm rounded-pill w-50" onclick="return confirm('Are you sure?')">
                                             <i class="bi bi-trash-fill"></i> Delete
                                         </a>
                                     </div>
@@ -336,16 +334,13 @@
                                 <div class="card-body d-flex flex-column">
                                     <div class="text-muted small mb-1">${l.brand}</div>
                                     <h5 class="product-title">${l.name}</h5>
-                                    <div class="product-price mt-auto">$${l.price}</div>
+                                    <div class="product-price mt-auto">$<fmt:formatNumber value="${l.price}" pattern="#,###" /></div>
                                     <a href="${pageContext.request.contextPath}/laptops/${l.id}" class="btn btn-outline-dark mt-3 rounded-pill btn-sm">View Details</a>
                                     <div class="d-flex gap-2 mt-2">
-                                        <a href="${pageContext.request.contextPath}/laptops/update/${l.id}" 
-                                           class="btn btn-warning btn-sm rounded-pill w-50">
+                                        <a href="${pageContext.request.contextPath}/laptops/update/${l.id}" class="btn btn-warning btn-sm rounded-pill w-50">
                                             <i class="bi bi-pencil-fill"></i> Edit
                                         </a>
-                                        <a href="${pageContext.request.contextPath}/laptops/delete/${l.id}" 
-                                           class="btn btn-danger btn-sm rounded-pill w-50"
-                                           onclick="return confirm('Are you sure?')">
+                                        <a href="${pageContext.request.contextPath}/laptops/delete/${l.id}" class="btn btn-danger btn-sm rounded-pill w-50" onclick="return confirm('Are you sure?')">
                                             <i class="bi bi-trash-fill"></i> Delete
                                         </a>
                                     </div>
@@ -393,16 +388,13 @@
                                     <div class="col-6"><i class="bi bi-cpu"></i> ${l.cpu}</div>
                                     <div class="col-6"><i class="bi bi-memory"></i> ${l.ram}</div>
                                 </div>
-                                <div class="product-price mt-auto">$${l.price}</div>
+                                <div class="product-price mt-auto">$<fmt:formatNumber value="${l.price}" pattern="#,###" /></div>
                                 <a href="${pageContext.request.contextPath}/laptops/${l.id}" class="btn btn-outline-dark mt-3 rounded-pill btn-sm">View Details</a>
                                 <div class="d-flex gap-2 mt-2">
-                                    <a href="${pageContext.request.contextPath}/laptops/update/${l.id}" 
-                                       class="btn btn-warning btn-sm rounded-pill w-50">
+                                    <a href="${pageContext.request.contextPath}/laptops/update/${l.id}" class="btn btn-warning btn-sm rounded-pill w-50">
                                         <i class="bi bi-pencil-fill"></i> Edit
                                     </a>
-                                    <a href="${pageContext.request.contextPath}/laptops/delete/${l.id}" 
-                                       class="btn btn-danger btn-sm rounded-pill w-50"
-                                       onclick="return confirm('Are you sure?')">
+                                    <a href="${pageContext.request.contextPath}/laptops/delete/${l.id}" class="btn btn-danger btn-sm rounded-pill w-50" onclick="return confirm('Are you sure?')">
                                         <i class="bi bi-trash-fill"></i> Delete
                                     </a>
                                 </div>
@@ -431,32 +423,40 @@
                     </ul>
                 </nav>
             </c:if>
+        </div>
 
-            <!-- Footer -->
-            <footer>
-                <div class="container">
-                    <div class="row">
-                        <div class="col-md-6 mb-4">
-                            <h5 class="footer-brand mb-3"><i class="bi bi-pc-display-horizontal text-primary me-2"></i>Octatech Laptop Shop</h5>
-                            <p class="text-muted">Providing premium technology solutions and the best laptops for every need.</p>
-                        </div>
-                        <div class="col-md-6 mb-4">
-                            <h5 class="fw-bold text-dark">Contact Us</h5>
-                            <ul class="list-unstyled text-muted">
-                                <li class="mb-2"><i class="bi bi-geo-alt-fill text-primary me-2"></i> Address: FPT University, Hanoi, Vietnam</li>
-                                <li class="mb-2"><i class="bi bi-person-fill text-primary me-2"></i> Leader: Pham Quoc Anh</li>
-                                <li class="mb-2"><i class="bi bi-telephone-fill text-primary me-2"></i> Phone: 0981583316</li>
-                                <li class="mb-2"><i class="bi bi-envelope-fill text-primary me-2"></i> Email: team8prj301@gmail.com</li>
-                            </ul>
-                        </div>
+        <!-- Footer -->
+        <footer>
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-6 mb-4">
+                        <h5 class="footer-brand mb-3"><i class="bi bi-pc-display-horizontal text-primary me-2"></i>Octatech Laptop Shop</h5>
+                        <p class="text-muted">Providing premium technology solutions and the best laptops for every need.</p>
                     </div>
-                    <hr class="border-secondary opacity-50">
-                    <div class="text-center text-muted">
-                        <small>&copy; 2026 Octatech Laptop Shop - Group 8. All Rights Reserved.</small>
+                    <div class="col-md-6 mb-4">
+                        <h5 class="fw-bold text-dark">Contact Us</h5>
+                        <ul class="list-unstyled text-muted">
+                            <li class="mb-2"><i class="bi bi-geo-alt-fill text-primary me-2"></i> Address: FPT University, Hanoi, Vietnam</li>
+                            <li class="mb-2"><i class="bi bi-person-fill text-primary me-2"></i> Leader: Pham Quoc Anh</li>
+                            <li class="mb-2"><i class="bi bi-telephone-fill text-primary me-2"></i> Phone: 0981583316</li>
+                            <li class="mb-2"><i class="bi bi-envelope-fill text-primary me-2"></i> Email: team8prj301@gmail.com</li>
+                        </ul>
                     </div>
                 </div>
-            </footer>
+                <hr class="border-secondary opacity-50">
+                <div class="text-center text-muted">
+                    <small>&copy; 2026 Octatech Laptop Shop - Group 8. All Rights Reserved.</small>
+                </div>
+            </div>
+        </footer>
 
-            <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+        <!-- Floating Admin Button -->
+        <a href="${pageContext.request.contextPath}/laptops/manage"
+           class="btn btn-success rounded-pill fw-bold shadow-lg position-fixed bottom-0 end-0 m-4 z-3"
+           style="font-family: 'Poppins', sans-serif;">
+            <i class="bi bi-gear-fill me-2"></i> Manage Laptops
+        </a>
+
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     </body>
 </html>
