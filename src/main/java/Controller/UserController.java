@@ -32,7 +32,7 @@ public class UserController {
     @GetMapping("/users")
     public String getAllUsers(Model model) {
         model.addAttribute("users", this.userService.handleGetAllUsers());
-        return "user/list"; 
+        return "user/list";
     }
 
     // Handles the form submission to create a new user

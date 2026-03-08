@@ -25,27 +25,26 @@ import org.springframework.web.multipart.MultipartFile;
  */
 @Controller
 public class LaptopController {
+
     private LaptopService laptopService;
 
     public LaptopController(LaptopService laptopService) {
         this.laptopService = laptopService;
     }
-    
+
     @PostMapping("/laptops")
     public String createLaptop(
-        @RequestParam("name") String name,
-        @RequestParam("brand") String brand,
-        @RequestParam("price") double price,
-        @RequestParam("cpu") String cpu,
-        @RequestParam("ram") String ram, 
-        @RequestParam("storage") String storage,
-        @RequestParam("color") String color,
-        @RequestParam("imageFile") MultipartFile file,
-        @RequestParam("featured") boolean isFeatured,
-        @RequestParam("newArrival") boolean isNewArrival,
-        @RequestParam("description") String description
-    ) 
-    {
+            @RequestParam("name") String name,
+            @RequestParam("brand") String brand,
+            @RequestParam("price") double price,
+            @RequestParam("cpu") String cpu,
+            @RequestParam("ram") String ram,
+            @RequestParam("storage") String storage,
+            @RequestParam("color") String color,
+            @RequestParam("imageFile") MultipartFile file,
+            @RequestParam("featured") boolean isFeatured,
+            @RequestParam("newArrival") boolean isNewArrival,
+            @RequestParam("description") String description) {
 
         System.out.println(">>> SERVER RECEIVED: " + name);
         Laptop laptop = new Laptop();
@@ -56,36 +55,45 @@ public class LaptopController {
         laptop.setColor(color);
         laptop.setCpu(cpu);
         laptop.setRam(ram);
-        
+
         String base64;
         try {
             base64 = Base64.getEncoder().encodeToString(file.getBytes());
             laptop.setImage(base64);
         } catch (IOException ex) {
-            System.out.println("loi lay anh");;
+            System.out.println("loi lay anh");
+            ;
         }
-        
+
         laptop.setDescription(description);
         laptop.setIsFeatured(isFeatured);
         laptop.setIsNewArrival(isNewArrival);
 
         this.laptopService.handleCreateLaptop(laptop);
-        return "redirect:/"; 
+        return "redirect:/";
     }
-    
+
     @GetMapping("/laptops/{id}")
     public String getLaptop(@PathVariable("id") Long id, Model model) {
         Laptop laptop = this.laptopService.handleGetLaptopById(id);
         model.addAttribute("laptop", laptop);
+
+        if (laptop != null) {
+            java.util.List<Laptop> similar = this.laptopService.getLaptopsByBrand(laptop.getBrand());
+            // Optionally filter out the current laptop
+            similar.removeIf(l -> l.getId() == laptop.getId());
+            model.addAttribute("similarLaptops", similar);
+        }
+
         return "detailLaptop"; // You would need a detail.jsp for this
     }
-    
+
     @GetMapping("/laptops/delete/{id}")
     public String deleteLaptop(@PathVariable("id") Long id) {
         this.laptopService.handleDeleteLaptop(id);
         return "redirect:/";
     }
-    
+
     // UPDATE goi den trang update jsp de update
     @GetMapping("/laptops/update/{id}")
     public String getUpdatePage(@PathVariable("id") Long id, Model model) {
@@ -96,8 +104,8 @@ public class LaptopController {
 
     // UPDATE logic
     @PostMapping("/laptops/update")
-    public String updateLaptop(@ModelAttribute Laptop laptop, 
-                               @RequestParam("imageFile") MultipartFile file) {
+    public String updateLaptop(@ModelAttribute Laptop laptop,
+            @RequestParam("imageFile") MultipartFile file) {
         try {
             if (!file.isEmpty()) {
                 String base64 = Base64.getEncoder().encodeToString(file.getBytes());

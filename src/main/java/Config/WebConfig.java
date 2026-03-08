@@ -31,20 +31,20 @@ public class WebConfig implements WebMvcConfigurer {
         InternalResourceViewResolver bean = new InternalResourceViewResolver();
         bean.setViewClass(JstlView.class);
         bean.setPrefix("/WEB-INF/views/"); // Folder where your HTML/JSP files will live
-        bean.setSuffix(".jsp");            // Using .jsp is standard for traditional MVC
+        bean.setSuffix(".jsp"); // Using .jsp is standard for traditional MVC
         return bean;
     }
 
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
-        // This allows your app to load images, CSS, and JS files from a 'resources' folder
+        // This allows your app to load images, CSS, and JS files from a 'resources'
+        // folder
         registry.addResourceHandler("/resources/**").addResourceLocations("/resources/");
     }
-    
+
     @Bean
     public StandardServletMultipartResolver multipartResolver() {
         return new StandardServletMultipartResolver();
     }
-    
 
 }

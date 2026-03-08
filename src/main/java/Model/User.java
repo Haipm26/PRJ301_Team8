@@ -9,9 +9,12 @@ import Utils.RoleEnum;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
+import java.util.List;
 
 /**
  *
@@ -20,6 +23,7 @@ import jakarta.persistence.Table;
 @Entity
 @Table(name = "Users")
 public class User {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -29,12 +33,12 @@ public class User {
 
     @Column(nullable = false)
     private String password; // Will be hashed
-    
+
     private String name;
     private String phone;
     private String address;
     private GenderEnum gender;
-    
+
     private RoleEnum role; // e.g., "ROLE_ADMIN" or "ROLE_USER"
 
     public Long getId() {
@@ -101,5 +105,14 @@ public class User {
         this.role = role;
     }
 
-    
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+    private List<Order> orders;
+
+    public List<Order> getOrders() {
+        return orders;
+    }
+
+    public void setOrders(List<Order> orders) {
+        this.orders = orders;
+    }
 }

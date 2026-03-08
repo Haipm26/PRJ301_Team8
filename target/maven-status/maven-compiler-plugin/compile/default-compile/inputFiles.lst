@@ -2,6 +2,7 @@ E:\Netbean projects\PRJ301_Team8\src\main\java\Config\DatabaseConfig.java
 E:\Netbean projects\PRJ301_Team8\src\main\java\Config\MyWebAppInitializer.java
 E:\Netbean projects\PRJ301_Team8\src\main\java\Config\WebConfig.java
 E:\Netbean projects\PRJ301_Team8\src\main\java\Controller\AuthController.java
+E:\Netbean projects\PRJ301_Team8\src\main\java\Controller\CartController.java
 E:\Netbean projects\PRJ301_Team8\src\main\java\Controller\HomeController.java
 E:\Netbean projects\PRJ301_Team8\src\main\java\Controller\LaptopController.java
 E:\Netbean projects\PRJ301_Team8\src\main\java\Controller\StatisticsController.java
@@ -12,9 +13,12 @@ E:\Netbean projects\PRJ301_Team8\src\main\java\Model\OrderDetail.java
 E:\Netbean projects\PRJ301_Team8\src\main\java\Model\User.java
 E:\Netbean projects\PRJ301_Team8\src\main\java\Model\UserLoginDTO.java
 E:\Netbean projects\PRJ301_Team8\src\main\java\Repository\LaptopRepository.java
+E:\Netbean projects\PRJ301_Team8\src\main\java\Repository\OrderDetailRepository.java
+E:\Netbean projects\PRJ301_Team8\src\main\java\Repository\OrderRepository.java
 E:\Netbean projects\PRJ301_Team8\src\main\java\Repository\StatisticsRepository.java
 E:\Netbean projects\PRJ301_Team8\src\main\java\Repository\UserRepository.java
 E:\Netbean projects\PRJ301_Team8\src\main\java\Service\LaptopService.java
+E:\Netbean projects\PRJ301_Team8\src\main\java\Service\OrderService.java
 E:\Netbean projects\PRJ301_Team8\src\main\java\Service\StatisticsService.java
 E:\Netbean projects\PRJ301_Team8\src\main\java\Service\UserService.java
 E:\Netbean projects\PRJ301_Team8\src\main\java\Utils\GenderEnum.java
