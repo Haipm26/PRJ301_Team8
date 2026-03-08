@@ -7,6 +7,7 @@ package Controller;
 import Model.User;
 import Service.UserService;
 import Utils.RoleEnum;
+import jakarta.servlet.http.HttpSession;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -51,20 +52,72 @@ public class UserController {
     public String getUpdateUserPage(@PathVariable("id") Long id, Model model) {
         User user = this.userService.handleGetUserById(id);
         model.addAttribute("user", user);
-        return "user/update";
+        return "user/updateUser";
     }
 
     // Handles the actual update logic
     @PostMapping("/users/update")
     public String updateUser(@ModelAttribute User user) {
         this.userService.handleUpdateUser(user);
-        return "redirect:/users";
+        return "redirect:/users/manage";
     }
 
     // Deletes a user by ID
     @GetMapping("/users/delete/{id}")
     public String deleteUser(@PathVariable("id") Long id) {
         this.userService.handleDeleteUser(id);
-        return "redirect:/users";
+        return "redirect:/users/manage";
+    }
+    
+    // redirect sang listUser
+    @GetMapping("/users/manage")
+    public String showManageUsers(Model model) {
+        // Fetch all users from database
+        model.addAttribute("users", this.userService.handleGetAllUsers());
+        return "user/listUser"; 
+    }
+
+    // Promote User to ADMIN
+    @GetMapping("/users/promote/{id}")
+    public String promoteUser(@PathVariable("id") Long id) {
+        User user = this.userService.handleGetUserById(id);
+        if (user != null) {
+            user.setRole(RoleEnum.ROLE_ADMIN); // Using your Utils Enum
+            this.userService.handleUpdateUser(user);
+        }
+        return "redirect:/users/manage";
+    }
+    
+    @GetMapping("/users/demote/{id}")
+    public String demoteUser(@PathVariable("id") Long id) {
+        User user = this.userService.handleGetUserById(id);
+        
+        if (user != null && "ADMIN".equals(user.getUsername())) {
+            // Skip demotion for the main admin
+            return "redirect:/users/manage?error=protected";
+        }
+        
+        if (user != null) {
+            // Change role back to standard User
+            user.setRole(RoleEnum.ROLE_USER); 
+            this.userService.handleUpdateUser(user);
+        }
+        return "redirect:/users/manage";
+    }
+    
+    
+    @GetMapping("/profile")
+    public String showProfilePage(HttpSession session, Model model) {
+        // 1. Get the current user from the session
+        User currentUser = (User) session.getAttribute("user");
+
+        // 2. Safety Check: If session expired or not logged in, go to login
+        if (currentUser == null) {
+            return "redirect:/login";
+        }
+
+        // 3. Send the user object to the JSP
+        model.addAttribute("userProfile", currentUser);
+        return "user/profileUser"; // Path: /WEB-INF/views/user/profileUser.jsp
     }
 }

@@ -4,6 +4,7 @@
  */
 package Config;
 
+import jakarta.servlet.Filter;
 import jakarta.servlet.MultipartConfigElement;
 import jakarta.servlet.ServletRegistration;
 import org.springframework.context.annotation.Bean;
@@ -12,6 +13,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.web.multipart.support.StandardServletMultipartResolver;
 import org.springframework.web.servlet.ViewResolver;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
+import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
@@ -46,5 +48,24 @@ public class WebConfig implements WebMvcConfigurer {
     public StandardServletMultipartResolver multipartResolver() {
         return new StandardServletMultipartResolver();
     }
+    
+    @Override
+    public void addInterceptors(InterceptorRegistry registry) {
+
+        registry.addInterceptor(new AdminInterceptor())
+                .addPathPatterns(
+                        "/laptops/manage",
+                        "/laptops/delete/**",
+                        "/laptops/update/**",
+                        "/laptops",
+                        "/users/manage",
+                        "/users/delete/**",
+                        "/users/update/**",
+                        "/users/promote/**",
+                        "/users/demote/**"
+                );
+    }
+
+    
 
 }

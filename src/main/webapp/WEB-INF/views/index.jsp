@@ -186,9 +186,11 @@
                             <a class="nav-link" href="${pageContext.request.contextPath}/">Home</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="${pageContext.request.contextPath}/statistics" style="white-space: nowrap;">
-                                <i class="bi bi-bar-chart-fill"></i> Statistics
-                            </a>
+                            <c:if test="${sessionScope.user.role == 'ROLE_ADMIN'}">
+                                <a class="nav-link" href="${pageContext.request.contextPath}/statistics" style="white-space: nowrap;">
+                                    <i class="bi bi-bar-chart-fill"></i> Statistics
+                                </a>
+                            </c:if>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link position-relative" href="${pageContext.request.contextPath}/cart" style="white-space: nowrap;">
@@ -300,12 +302,16 @@
                                     <div class="product-price mt-auto">$<fmt:formatNumber value="${l.price}" pattern="#,###" /></div>
                                     <a href="${pageContext.request.contextPath}/laptops/${l.id}" class="btn btn-outline-dark mt-3 rounded-pill btn-sm">View Details</a>
                                     <div class="d-flex gap-2 mt-2">
-                                        <a href="${pageContext.request.contextPath}/laptops/update/${l.id}" class="btn btn-warning btn-sm rounded-pill w-50">
-                                            <i class="bi bi-pencil-fill"></i> Edit
-                                        </a>
-                                        <a href="${pageContext.request.contextPath}/laptops/delete/${l.id}" class="btn btn-danger btn-sm rounded-pill w-50" onclick="return confirm('Are you sure?')">
-                                            <i class="bi bi-trash-fill"></i> Delete
-                                        </a>
+                                        <c:if test="${sessionScope.user.role == 'ROLE_ADMIN'}">
+                                            <a href="${pageContext.request.contextPath}/laptops/update/${l.id}" class="btn btn-warning btn-sm rounded-pill w-50">
+                                                <i class="bi bi-pencil-fill"></i> Edit
+                                            </a>
+                                        </c:if>
+                                        <c:if test="${sessionScope.user.role == 'ROLE_ADMIN'}">
+                                            <a href="${pageContext.request.contextPath}/laptops/delete/${l.id}" class="btn btn-danger btn-sm rounded-pill w-50" onclick="return confirm('Are you sure?')">
+                                                <i class="bi bi-trash-fill"></i> Delete
+                                            </a>
+                                        </c:if>
                                     </div>
                                 </div>
                             </div>
@@ -338,12 +344,16 @@
                                     <div class="product-price mt-auto">$<fmt:formatNumber value="${l.price}" pattern="#,###" /></div>
                                     <a href="${pageContext.request.contextPath}/laptops/${l.id}" class="btn btn-outline-dark mt-3 rounded-pill btn-sm">View Details</a>
                                     <div class="d-flex gap-2 mt-2">
-                                        <a href="${pageContext.request.contextPath}/laptops/update/${l.id}" class="btn btn-warning btn-sm rounded-pill w-50">
-                                            <i class="bi bi-pencil-fill"></i> Edit
-                                        </a>
-                                        <a href="${pageContext.request.contextPath}/laptops/delete/${l.id}" class="btn btn-danger btn-sm rounded-pill w-50" onclick="return confirm('Are you sure?')">
-                                            <i class="bi bi-trash-fill"></i> Delete
-                                        </a>
+                                        <c:if test="${sessionScope.user.role == 'ROLE_ADMIN'}">
+                                            <a href="${pageContext.request.contextPath}/laptops/update/${l.id}" class="btn btn-warning btn-sm rounded-pill w-50">
+                                                <i class="bi bi-pencil-fill"></i> Edit
+                                            </a>
+                                        </c:if>
+                                        <c:if test="${sessionScope.user.role == 'ROLE_ADMIN'}">
+                                            <a href="${pageContext.request.contextPath}/laptops/delete/${l.id}" class="btn btn-danger btn-sm rounded-pill w-50" onclick="return confirm('Are you sure?')">
+                                                <i class="bi bi-trash-fill"></i> Delete
+                                            </a>
+                                        </c:if>
                                     </div>
                                 </div>
                             </div>
@@ -392,12 +402,16 @@
                                 <div class="product-price mt-auto">$<fmt:formatNumber value="${l.price}" pattern="#,###" /></div>
                                 <a href="${pageContext.request.contextPath}/laptops/${l.id}" class="btn btn-outline-dark mt-3 rounded-pill btn-sm">View Details</a>
                                 <div class="d-flex gap-2 mt-2">
-                                    <a href="${pageContext.request.contextPath}/laptops/update/${l.id}" class="btn btn-warning btn-sm rounded-pill w-50">
-                                        <i class="bi bi-pencil-fill"></i> Edit
-                                    </a>
-                                    <a href="${pageContext.request.contextPath}/laptops/delete/${l.id}" class="btn btn-danger btn-sm rounded-pill w-50" onclick="return confirm('Are you sure?')">
-                                        <i class="bi bi-trash-fill"></i> Delete
-                                    </a>
+                                    <c:if test="${sessionScope.user.role == 'ROLE_ADMIN'}">
+                                        <a href="${pageContext.request.contextPath}/laptops/update/${l.id}" class="btn btn-warning btn-sm rounded-pill w-50">
+                                            <i class="bi bi-pencil-fill"></i> Edit
+                                        </a>
+                                    </c:if>
+                                    <c:if test="${sessionScope.user.role == 'ROLE_ADMIN'}">
+                                        <a href="${pageContext.request.contextPath}/laptops/delete/${l.id}" class="btn btn-danger btn-sm rounded-pill w-50" onclick="return confirm('Are you sure?')">
+                                            <i class="bi bi-trash-fill"></i> Delete
+                                        </a>
+                                    </c:if>
                                 </div>
                             </div>
                         </div>
@@ -452,12 +466,24 @@
         </footer>
 
         <!-- Floating Admin Button -->
-        <a href="${pageContext.request.contextPath}/laptops/manage"
-           class="btn btn-success rounded-pill fw-bold shadow-lg position-fixed bottom-0 end-0 m-4 z-3"
-           style="font-family: 'Poppins', sans-serif;">
-            <i class="bi bi-gear-fill me-2"></i> Manage Laptops
-        </a>
+        <c:if test="${sessionScope.user.role == 'ROLE_ADMIN'}">
+            <%-- Fixed container in the bottom-right corner --%>
+            <div class="position-fixed bottom-0 end-0 m-4 z-3 d-flex flex-column align-items-end gap-3">
 
+                <%-- Top Button: Manage Users --%>
+                <a href="${pageContext.request.contextPath}/users/manage"
+                   class="btn btn-primary rounded-pill fw-bold shadow-lg px-4">
+                   <i class="bi bi-people-fill me-2"></i> Manage Users
+                </a>
+
+                <%-- Bottom Button: Manage Laptops --%>
+                <a href="${pageContext.request.contextPath}/laptops/manage"
+                   class="btn btn-success rounded-pill fw-bold shadow-lg px-4">
+                   <i class="bi bi-laptop me-2"></i> Manage Laptops
+                </a>
+
+            </div>
+        </c:if>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     </body>
 </html>

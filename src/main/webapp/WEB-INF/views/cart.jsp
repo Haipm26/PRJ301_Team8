@@ -382,11 +382,13 @@
                 </footer>
 
                 <!-- Floating Admin Button -->
-                <a href="${pageContext.request.contextPath}/laptops/manage"
-                    class="btn btn-success rounded-pill fw-bold shadow-lg position-fixed bottom-0 end-0 m-4 z-3"
-                    style="font-family: 'Poppins', sans-serif;">
-                    <i class="bi bi-gear-fill me-2"></i> Manage Laptops
-                </a>
+                <c:if test="${sessionScope.user.role == 'ROLE_ADMIN'}">
+                    <a href="${pageContext.request.contextPath}/laptops/manage"
+                        class="btn btn-success rounded-pill fw-bold shadow-lg position-fixed bottom-0 end-0 m-4 z-3"
+                        style="font-family: 'Poppins', sans-serif;">
+                        <i class="bi bi-gear-fill me-2"></i> Manage Laptops
+                    </a>
+                </c:if>
 
                 <!-- Bootstrap 5 JS Bundle -->
                 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>

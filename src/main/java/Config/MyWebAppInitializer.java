@@ -4,6 +4,7 @@
  */
 package Config;
 
+import jakarta.servlet.Filter;
 import jakarta.servlet.MultipartConfigElement;
 import jakarta.servlet.ServletRegistration;
 import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer;
@@ -40,5 +41,11 @@ public class MyWebAppInitializer extends AbstractAnnotationConfigDispatcherServl
                         5000000,
                         5000000 * 2,
                         0));
+    }
+    
+    
+    @Override
+    protected Filter[] getServletFilters() {
+        return new Filter[] { new NoCacheFilter() };
     }
 }
