@@ -7,20 +7,24 @@ package Model;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
+import java.util.List;
 
 /**
  *
  * @author Pham Minh Hai
  */
-@Entity 
+@Entity
 @Table(name = "Laptops")
 public class Laptop {
-    @Id 
+
+    @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    private Long id;
     private String name;
     private String brand;
     private double price;
@@ -28,19 +32,19 @@ public class Laptop {
     private String ram;
     private String storage;
     private String color;
-    
+
     @Column(columnDefinition = "nvarchar(MAX)")
     private String image;
     // san pham noi bat va san pham moi de filter
     private boolean isFeatured;
     private boolean isNewArrival;
-    
+
     @Column(columnDefinition = "nvarchar(MAX)")
     private String description;
-    
+
     public Laptop() {
     }
-    
+
     public String getStorage() {
         return storage;
     }
@@ -49,11 +53,11 @@ public class Laptop {
         this.storage = storage;
     }
 
-    public long getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -116,7 +120,6 @@ public class Laptop {
     public boolean isIsFeatured() {
         return isFeatured;
     }
-    
 
     public void setIsFeatured(boolean isFeatured) {
         this.isFeatured = isFeatured;
@@ -136,5 +139,16 @@ public class Laptop {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    @OneToMany(mappedBy = "laptop", cascade = CascadeType.ALL)
+    private List<OrderDetail> orderDetails;
+
+    public List<OrderDetail> getOrderDetails() {
+        return orderDetails;
+    }
+
+    public void setOrderDetails(List<OrderDetail> orderDetails) {
+        this.orderDetails = orderDetails;
     }
 }
