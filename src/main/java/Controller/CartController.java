@@ -132,7 +132,7 @@ public class CartController {
     @PostMapping("/checkout")
     public String checkout(HttpSession session, RedirectAttributes redirectAttributes) {
         List<OrderDetail> cart = getSessionCart(session);
-        User user = (User) session.getAttribute("loggedInUser"); // Might be null, that's fine
+        User user = (User) session.getAttribute("user"); // Might be null, that's fine
 
         if (!cart.isEmpty()) {
             orderService.checkoutSessionCart(cart, user);
