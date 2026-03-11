@@ -215,7 +215,7 @@
                                                     <hr class="dropdown-divider">
                                                 </li>
                                                 <li><a class="dropdown-item text-danger"
-                                                        href="${pageContext.request.contextPath}/auth/logout">Logout</a>
+                                                        href="${pageContext.request.contextPath}/logout">Logout</a>
                                                 </li>
                                             </ul>
                                         </li>
@@ -304,11 +304,11 @@
                                     class="action-buttons d-flex gap-3 align-items-center">
                                     <input type="hidden" name="laptopId" value="${laptop.id}">
                                     <div class="input-group" style="width: 140px;">
-                                        <button class="btn btn-outline-secondary" type="button"
+                                        <button class="btn btn-outline-secondary px-3 py-2" type="button"
                                             onclick="document.getElementById('quantity').value > 1 ? document.getElementById('quantity').value-- : null">-</button>
                                         <input type="number" name="quantity" id="quantity"
                                             class="form-control text-center text-dark" value="1" min="1" required>
-                                        <button class="btn btn-outline-secondary" type="button"
+                                        <button class="btn btn-outline-secondary px-3 py-2" type="button"
                                             onclick="document.getElementById('quantity').value++">+</button>
                                     </div>
                                     <button type="submit" class="btn btn-dark rounded-pill flex-grow-1"><i
@@ -317,45 +317,45 @@
                             </div>
                         </div>
                     </div>
-                </div>
-
-                <!-- Similar Products Section -->
-                <c:if test="${not empty similarLaptops}">
-                    <div class="similar-section mb-5 mt-5">
-                        <h3 class="fw-bold mb-4">Similar Products you might like</h3>
-                        <div class="row row-cols-1 row-cols-md-2 row-cols-lg-4 g-4">
-                            <c:forEach items="${similarLaptops}" var="sl">
-                                <div class="col">
-                                    <div class="card h-100 shadow-sm border-0"
-                                        style="border-radius:15px; overflow:hidden;">
-                                        <div
-                                            style="height:150px; background:#fff; padding:10px; display:flex; justify-content:center; align-items:center;">
-                                            <c:choose>
-                                                <c:when test="${not empty sl.image}">
-                                                    <img src="data:image/jpeg;base64,${sl.image}"
-                                                        style="max-height:100%; max-width:100%; object-fit:contain;"
-                                                        alt="${sl.name}">
-                                                </c:when>
-                                                <c:otherwise>
-                                                    <i class="bi bi-laptop text-muted" style="font-size:3rem;"></i>
-                                                </c:otherwise>
-                                            </c:choose>
-                                        </div>
-                                        <div class="card-body d-flex flex-column">
-                                            <div class="text-muted small">${sl.brand}</div>
-                                            <h6 class="fw-bold text-truncate" title="${sl.name}">${sl.name}</h6>
-                                            <div class="text-info fw-bold mb-3">$
-                                                <fmt:formatNumber value="${sl.price}" pattern="#,###" />
+                    <!-- Similar Products Section -->
+                    <c:if test="${not empty similarLaptops}">
+                        <div class="similar-section mb-5 mt-5">
+                            <h3 class="fw-bold mb-4">Similar Products you might like</h3>
+                            <div class="row row-cols-1 row-cols-md-2 row-cols-lg-4 g-4">
+                                <c:forEach items="${similarLaptops}" var="sl">
+                                    <div class="col">
+                                        <div class="card h-100 shadow-sm border-0"
+                                            style="border-radius:15px; overflow:hidden;">
+                                            <div
+                                                style="height:150px; background:#fff; padding:10px; display:flex; justify-content:center; align-items:center;">
+                                                <c:choose>
+                                                    <c:when test="${not empty sl.image}">
+                                                        <img src="data:image/jpeg;base64,${sl.image}"
+                                                            style="max-height:100%; max-width:100%; object-fit:contain;"
+                                                            alt="${sl.name}">
+                                                    </c:when>
+                                                    <c:otherwise>
+                                                        <i class="bi bi-laptop text-muted" style="font-size:3rem;"></i>
+                                                    </c:otherwise>
+                                                </c:choose>
                                             </div>
-                                            <a href="${pageContext.request.contextPath}/laptops/${sl.id}"
-                                                class="btn btn-outline-dark btn-sm rounded-pill mt-auto">View</a>
+                                            <div class="card-body d-flex flex-column">
+                                                <div class="text-muted small">${sl.brand}</div>
+                                                <h6 class="fw-bold text-truncate" title="${sl.name}">${sl.name}</h6>
+                                                <div class="text-info fw-bold mb-3">$
+                                                    <fmt:formatNumber value="${sl.price}" pattern="#,###" />
+                                                </div>
+                                                <a href="${pageContext.request.contextPath}/laptops/${sl.id}"
+                                                    class="btn btn-outline-dark btn-sm rounded-pill mt-auto">View</a>
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
-                            </c:forEach>
+                                </c:forEach>
+                            </div>
                         </div>
-                    </div>
-                </c:if>
+                    </c:if>
+
+                </div>
 
                 <!-- Footer -->
                 <footer>

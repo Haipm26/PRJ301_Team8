@@ -199,7 +199,7 @@
                                                     <hr class="dropdown-divider">
                                                 </li>
                                                 <li><a class="dropdown-item text-danger"
-                                                        href="${pageContext.request.contextPath}/auth/logout">Logout</a>
+                                                        href="${pageContext.request.contextPath}/logout">Logout</a>
                                                 </li>
                                             </ul>
                                         </li>
