@@ -51,6 +51,10 @@ public class CartController {
 
     @GetMapping
     public String viewCart(Model model, HttpSession session) {
+        if (session.getAttribute("user") == null) {
+            return "redirect:/login";
+        }
+
         List<OrderDetail> cartItems = getSessionCart(session);
 
         double totalAmount = 0;
@@ -67,6 +71,10 @@ public class CartController {
     public String addToCart(@RequestParam("laptopId") Long laptopId,
             @RequestParam("quantity") int quantity,
             HttpSession session) {
+        if (session.getAttribute("user") == null) {
+            return "redirect:/login";
+        }
+
         List<OrderDetail> cart = getSessionCart(session);
         Laptop laptop = laptopService.getLaptopById(laptopId);
 
@@ -102,6 +110,10 @@ public class CartController {
     public String updateCart(@RequestParam("orderDetailId") Long laptopId,
             @RequestParam("quantity") int quantity,
             HttpSession session) {
+        if (session.getAttribute("user") == null) {
+            return "redirect:/login";
+        }
+
         List<OrderDetail> cart = getSessionCart(session);
         for (OrderDetail item : cart) {
             if (item.getLaptop().getId() == laptopId) {
@@ -122,6 +134,10 @@ public class CartController {
     @GetMapping("/remove")
     public String removeFromCart(@RequestParam("orderDetailId") Long laptopId,
             HttpSession session) {
+        if (session.getAttribute("user") == null) {
+            return "redirect:/login";
+        }
+
         List<OrderDetail> cart = getSessionCart(session);
         cart.removeIf(item -> item.getLaptop().getId() == laptopId);
         session.setAttribute("cartItems", cart);
@@ -131,8 +147,12 @@ public class CartController {
 
     @PostMapping("/checkout")
     public String checkout(HttpSession session, RedirectAttributes redirectAttributes) {
+        User user = (User) session.getAttribute("user");
+        if (user == null) {
+            return "redirect:/login";
+        }
+
         List<OrderDetail> cart = getSessionCart(session);
-        User user = (User) session.getAttribute("loggedInUser"); // Might be null, that's fine
 
         if (!cart.isEmpty()) {
             orderService.checkoutSessionCart(cart, user);

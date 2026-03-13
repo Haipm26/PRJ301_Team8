@@ -1,357 +1,523 @@
 <%@ page contentType="text/html;charset=UTF-8" %>
 <%@ taglib prefix="c" uri="jakarta.tags.core" %>
 <%@ taglib prefix="fmt" uri="jakarta.tags.fmt" %>
-<html>
+<!DOCTYPE html>
+<html lang="en">
+
     <head>
-        <title>Laptop Statistics</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Statistics - Octatech LaptopShop</title>
+        <!-- Fonts and Icons matching index.jsp -->
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+        <link
+            href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&family=Righteous&family=Poppins:wght@300;400;500;600;700&display=swap"
+            rel="stylesheet">
+        <link rel="stylesheet"
+              href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+
         <style>
-            * {
-                box-sizing: border-box;
-                margin: 0;
-                padding: 0;
-            }
             body {
-                font-family: 'Segoe UI', Arial, sans-serif;
-                background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+                font-family: 'Inter', sans-serif;
+                background-color: #f8f9fa;
+                display: flex;
+                flex-direction: column;
                 min-height: 100vh;
-                padding: 30px 20px;
-                color: #fff;
             }
-            h1 {
-                text-align: center;
-                font-size: 32px;
-                font-weight: 700;
-                margin-bottom: 10px;
-                background: linear-gradient(90deg, #e94560, #0f3460);
+
+            .navbar-custom {
+                background-color: #ffffff;
+                box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+            }
+
+            .navbar-custom .navbar-brand,
+            .footer-brand {
+                font-family: 'Righteous', cursive;
+                font-size: 1.8rem;
+                letter-spacing: 1.5px;
+                background: linear-gradient(45deg, #0d6efd, #0dcaf0);
                 -webkit-background-clip: text;
+                background-clip: text;
                 -webkit-text-fill-color: transparent;
-                letter-spacing: 2px;
+                text-transform: uppercase;
             }
-            .subtitle {
-                text-align: center;
-                color: #aaa;
-                margin-bottom: 40px;
-                font-size: 14px;
+
+            .navbar-custom .nav-link,
+            footer {
+                font-family: 'Poppins', sans-serif;
             }
-            .cards {
-                display: flex;
-                justify-content: center;
-                gap: 16px;
-                flex-wrap: wrap;
-                margin-bottom: 50px;
+
+            .navbar-custom .nav-link {
+                color: #495057;
+                font-weight: 600;
             }
-            .card {
-                background: rgba(255,255,255,0.05);
-                backdrop-filter: blur(10px);
-                border: 1px solid rgba(255,255,255,0.1);
-                border-radius: 16px;
-                padding: 24px 28px;
-                text-align: center;
-                min-width: 160px;
+
+            .navbar-custom .nav-link:hover,
+            .navbar-custom .nav-link.active {
+                color: #0d6efd;
+            }
+
+            footer {
+                background-color: #f1f5f9;
+                color: #64748b;
+                padding: 40px 0 20px;
+                margin-top: auto;
+                border-top: 1px solid #e2e8f0;
+            }
+
+            footer h5 {
+                color: #334155;
+                font-weight: 700;
+                margin-bottom: 20px;
+            }
+
+            .stat-card {
+                border: none;
+                border-radius: 15px;
+                box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
                 transition: transform 0.2s, box-shadow 0.2s;
+                background-color: #fff;
+                padding: 24px;
+                text-align: center;
+                height: 100%;
             }
-            .card:hover {
+
+            .stat-card:hover {
                 transform: translateY(-5px);
-                box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+                box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
             }
-            .card .icon {
-                font-size: 28px;
+
+            .stat-icon {
+                font-size: 2.5rem;
                 margin-bottom: 10px;
             }
-            .card .label {
-                font-size: 12px;
-                color: #aaa;
-                margin-bottom: 8px;
+
+            .stat-label {
+                font-size: 0.8rem;
+                color: #6c757d;
                 text-transform: uppercase;
                 letter-spacing: 1px;
-            }
-            .card .value {
-                font-size: 20px;
                 font-weight: 700;
+                margin-bottom: 5px;
             }
-            .card.blue   {
-                border-top: 3px solid #3498db;
+
+            .stat-value {
+                font-size: 1.8rem;
+                font-weight: 800;
             }
-            .card.blue .value   {
-                color: #3498db;
+
+            /* Border top matching the old colors */
+            .card-blue {
+                border-top: 4px solid #0d6efd;
             }
-            .card.green  {
-                border-top: 3px solid #2ecc71;
+
+            .card-blue .stat-value {
+                color: #0d6efd;
             }
-            .card.green .value  {
-                color: #2ecc71;
+
+            .card-green {
+                border-top: 4px solid #198754;
             }
-            .card.red    {
-                border-top: 3px solid #e74c3c;
+
+            .card-green .stat-value {
+                color: #198754;
             }
-            .card.red .value    {
-                color: #e74c3c;
+
+            .card-red {
+                border-top: 4px solid #dc3545;
             }
-            .card.orange {
-                border-top: 3px solid #e67e22;
+
+            .card-red .stat-value {
+                color: #dc3545;
             }
-            .card.orange .value {
-                color: #e67e22;
+
+            .card-orange {
+                border-top: 4px solid #fd7e14;
             }
-            .card.purple {
-                border-top: 3px solid #9b59b6;
+
+            .card-orange .stat-value {
+                color: #fd7e14;
             }
-            .card.purple .value {
-                color: #9b59b6;
+
+            .card-purple {
+                border-top: 4px solid #6f42c1;
             }
-            .filter-section {
-                background: rgba(255,255,255,0.05);
-                backdrop-filter: blur(10px);
-                border: 1px solid rgba(255,255,255,0.1);
-                border-radius: 16px;
-                padding: 24px;
-                max-width: 700px;
-                margin: 0 auto 40px;
+
+            .card-purple .stat-value {
+                color: #6f42c1;
             }
-            .filter-section h3 {
-                color: #fff;
-                margin-bottom: 16px;
-                font-size: 16px;
-                text-transform: uppercase;
-                letter-spacing: 1px;
-            }
-            .filter-row {
-                display: flex;
-                gap: 12px;
-                align-items: center;
-                flex-wrap: wrap;
-            }
-            .filter-row label {
-                color: #aaa;
-                font-size: 13px;
-            }
-            .filter-row select {
-                background: rgba(255,255,255,0.1);
-                color: #fff;
-                border: 1px solid rgba(255,255,255,0.2);
-                border-radius: 8px;
-                padding: 10px 16px;
-                font-size: 14px;
-                cursor: pointer;
-                flex: 1;
-            }
-            .filter-row select option {
-                background: #1a1a2e;
-                color: #fff;
-            }
-            .btn {
-                padding: 10px 24px;
-                border-radius: 8px;
-                border: none;
-                font-size: 14px;
-                font-weight: 600;
-                cursor: pointer;
-                transition: all 0.2s;
-            }
-            .btn-primary {
-                background: linear-gradient(135deg, #e94560, #c0392b);
+
+            .dashboard-header {
+                background: linear-gradient(45deg, #0d6efd, #0dcaf0);
                 color: white;
+                padding: 40px 0;
+                margin-bottom: 40px;
+                border-bottom-left-radius: 50px;
+                border-bottom-right-radius: 50px;
             }
-            .btn-primary:hover {
-                opacity: 0.85;
-                transform: translateY(-1px);
+
+            .filter-section {
+                background: white;
+                padding: 20px;
+                border-radius: 15px;
+                box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+                margin-bottom: 30px;
             }
-            .section-title {
-                text-align: center;
-                font-size: 20px;
-                font-weight: 600;
-                color: #fff;
-                margin-bottom: 20px;
-                padding-bottom: 10px;
-                border-bottom: 2px solid rgba(233,69,96,0.5);
-                max-width: 900px;
-                margin-left: auto;
-                margin-right: auto;
-            }
-            .table-wrapper {
-                max-width: 1000px;
-                margin: 0 auto 50px;
-                border-radius: 16px;
+
+            .table-card {
+                background: white;
+                border-radius: 15px;
+                box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
                 overflow: hidden;
-                box-shadow: 0 8px 32px rgba(0,0,0,0.3);
+                margin-bottom: 40px;
             }
-            table {
-                width: 100%;
-                border-collapse: collapse;
-                background: rgba(255,255,255,0.05);
-                backdrop-filter: blur(10px);
+
+            .table-card .card-header {
+                background-color: #fff;
+                border-bottom: 2px solid #f8f9fa;
+                padding: 20px;
+                font-weight: 800;
+                font-size: 1.25rem;
             }
-            thead tr {
-                background: linear-gradient(135deg, #e94560, #c0392b);
+
+            .table> :not(caption)>*>* {
+                padding: 1rem;
+                vertical-align: middle;
             }
-            th {
-                padding: 14px 16px;
-                text-align: left;
-                font-size: 13px;
-                text-transform: uppercase;
-                letter-spacing: 1px;
-                color: #fff;
-            }
-            td {
-                padding: 14px 16px;
-                border-bottom: 1px solid rgba(255,255,255,0.05);
-                color: #ddd;
-                font-size: 14px;
-            }
-            tbody tr:hover td {
-                background: rgba(255,255,255,0.08);
-            }
-            tbody tr:last-child td {
-                border-bottom: none;
-            }
-            td img {
+
+            .product-img {
                 width: 80px;
                 height: 55px;
-                object-fit: cover;
+                object-fit: contain;
+                background-color: #f8f9fa;
                 border-radius: 6px;
-                border: 1px solid rgba(255,255,255,0.1);
+                padding: 5px;
             }
-            .price-tag {
-                color: #2ecc71;
+
+            .price-text {
+                color: #198754;
                 font-weight: 700;
             }
-            .brand-badge {
-                background: rgba(233,69,96,0.2);
-                color: #e94560;
-                border: 1px solid rgba(233,69,96,0.3);
-                padding: 3px 10px;
+
+            .badge-brand {
+                background-color: rgba(13, 110, 253, 0.1);
+                color: #0d6efd;
+                font-weight: 700;
+                padding: 8px 12px;
                 border-radius: 20px;
-                font-size: 12px;
-                font-weight: 600;
-            }
-            .back-btn {
-                display: block;
-                width: fit-content;
-                margin: 0 auto 40px;
-                padding: 12px 30px;
-                background: rgba(255,255,255,0.1);
-                color: #fff;
-                text-decoration: none;
-                border-radius: 8px;
-                border: 1px solid rgba(255,255,255,0.2);
-                font-weight: 600;
-                transition: all 0.2s;
-            }
-            .back-btn:hover {
-                background: rgba(255,255,255,0.2);
-                transform: translateY(-2px);
             }
         </style>
     </head>
+
     <body>
-
-        <h1>📊 LAPTOP STATISTICS</h1>
-        <p class="subtitle">Price analysis and products by brand</p>
-
-        <!-- CARDS -->
-        <div class="cards">
-            <div class="card blue">
-                <div class="icon">📦</div>
-                <div class="label">Total Products</div>
-                <div class="value">${count}</div>
-            </div>
-            <div class="card green">
-                <div class="icon">📈</div>
-                <div class="label">Highest Price</div>
-                <div class="value">$<fmt:formatNumber value="${maxPrice}" pattern="#,###"/></div>
-            </div>
-            <div class="card red">
-                <div class="icon">📉</div>
-                <div class="label">Lowest Price</div>
-                <div class="value">$<fmt:formatNumber value="${minPrice}" pattern="#,###"/></div>
-            </div>
-            <div class="card orange">
-                <div class="icon">⚖️</div>
-                <div class="label">Average Price</div>
-                <div class="value">$<fmt:formatNumber value="${avgPrice}" pattern="#,###"/></div>
-            </div>
-            <div class="card purple">
-                <div class="icon">💰</div>
-                <div class="label">Total Value</div>
-                <div class="value">$<fmt:formatNumber value="${sumPrice}" pattern="#,###"/></div>
-            </div>
-        </div>
-
-        <!-- FILTER -->
-        <div class="filter-section">
-            <h3>🔍 Filter by Brand</h3>
-            <form action="${pageContext.request.contextPath}/statistics" method="get">
-                <div class="filter-row">
-                    <label>Brand:</label>
-                    <select name="brand">
-                        <option value="">-- All --</option>
-                        <c:forEach items="${brands}" var="b">
-                            <option value="${b}" ${b == selectedBrand ? 'selected' : ''}>${b}</option>
-                        </c:forEach>
-                    </select>
-                    <label>Sort:</label>
-                    <select name="sort">
-                        <option value="desc" ${sort == 'desc' ? 'selected' : ''}>High → Low</option>
-                        <option value="asc"  ${sort == 'asc'  ? 'selected' : ''}>Low → High</option>
-                    </select>
-                    <button type="submit" class="btn btn-primary">View</button>
+        <!-- Navbar -->
+        <nav class="navbar navbar-expand-lg navbar-custom sticky-top">
+            <div class="container">
+                <a class="navbar-brand" href="${pageContext.request.contextPath}/">
+                    <i class="bi bi-pc-display-horizontal text-primary me-2"></i>Octatech Laptop Shop
+                </a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                        data-bs-target="#navbarNav">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav ms-auto align-items-center">
+                        <li class="nav-item">
+                            <a class="nav-link" href="${pageContext.request.contextPath}/">Home</a>
+                        </li>
+                        <li class="nav-item">
+                            <c:if test="${sessionScope.user.role == 'ROLE_ADMIN'}">
+                                <a class="nav-link active" href="${pageContext.request.contextPath}/statistics"
+                                   style="white-space: nowrap;">
+                                    <i class="bi bi-bar-chart-fill"></i> Statistics
+                                </a>
+                            </c:if>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link position-relative" href="${pageContext.request.contextPath}/cart"
+                               style="white-space: nowrap;">
+                                <i class="bi bi-cart3 fs-5"></i> Cart
+                                <c:if test="${not empty sessionScope.cartCount and sessionScope.cartCount > 0}">
+                                    <span
+                                        class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger"
+                                        style="margin-left: -15px; margin-top: 10px;">
+                                        ${sessionScope.cartCount}
+                                    </span>
+                                </c:if>
+                            </a>
+                        </li>
+                        <c:choose>
+                            <c:when test="${not empty sessionScope.user}">
+                                <li class="nav-item dropdown">
+                                    <a class="nav-link dropdown-toggle" href="#" role="button"
+                                       data-bs-toggle="dropdown">
+                                        <i class="bi bi-person-circle"></i> ${sessionScope.user.name}
+                                    </a>
+                                    <ul class="dropdown-menu dropdown-menu-end">
+                                        <li><a class="dropdown-item"
+                                               href="${pageContext.request.contextPath}/profile">Profile</a>
+                                        </li>
+                                        <li><a class="dropdown-item"
+                                               href="${pageContext.request.contextPath}/change-password">Change
+                                                Password</a></li>
+                                        <li>
+                                            <hr class="dropdown-divider">
+                                        </li>
+                                        <li><a class="dropdown-item text-danger"
+                                               href="${pageContext.request.contextPath}/logout">Logout</a></li>
+                                    </ul>
+                                </li>
+                            </c:when>
+                            <c:otherwise>
+                                <li class="nav-item d-flex align-items-center">
+                                    <a class="btn btn-outline-primary ms-2 px-4 rounded-pill fw-bold"
+                                       style="border-width:2px;"
+                                       href="${pageContext.request.contextPath}/login">Login</a>
+                                </li>
+                                <li class="nav-item d-flex align-items-center">
+                                    <a class="btn btn-primary ms-2 px-4 rounded-pill text-white fw-bold shadow-sm"
+                                       href="${pageContext.request.contextPath}/register">Register</a>
+                                </li>
+                            </c:otherwise>
+                        </c:choose>
+                    </ul>
                 </div>
-            </form>
+            </div>
+        </nav>
+
+        <!-- Header Box -->
+        <div class="dashboard-header text-center">
+            <div class="container">
+                <h1 class="display-5 fw-bold"><i class="bi bi-pie-chart-fill me-2"></i> Dashboard Statistics
+                </h1>
+                <p class="lead mb-0 opacity-75">Analytics and performance at a glance</p>
+            </div>
         </div>
 
-        <!-- PRODUCTS BY BRAND -->
-        <c:if test="${not empty laptops}">
-            <div class="section-title">🖥️ Products by: ${selectedBrand}</div>
-            <div class="table-wrapper">
-                <table>
-                    <thead>
-                        <tr>
-                            <th>ID</th><th>Product Name</th><th>Price</th>
-                            <th>CPU</th><th>RAM</th><th>Storage</th><th>Image</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <c:forEach items="${laptops}" var="l">
+        <!-- Main Content -->
+        <div class="container flex-grow-1">
+
+            <!-- Info Cards -->
+            <div
+                class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-xl-5 g-4 mb-5 justify-content-center">
+                <div class="col">
+                    <div class="stat-card card-blue">
+                        <div class="stat-icon text-primary"><i class="bi bi-box-seam"></i></div>
+                        <div class="stat-label">Total Products</div>
+                        <div class="stat-value">${count}</div>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="stat-card card-green">
+                        <div class="stat-icon text-success"><i class="bi bi-graph-up-arrow"></i></div>
+                        <div class="stat-label">Highest Price</div>
+                        <div class="stat-value">$
+                            <fmt:formatNumber value="${maxPrice}" pattern="#,###" />
+                        </div>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="stat-card card-red">
+                        <div class="stat-icon text-danger"><i class="bi bi-graph-down-arrow"></i></div>
+                        <div class="stat-label">Lowest Price</div>
+                        <div class="stat-value">$
+                            <fmt:formatNumber value="${minPrice}" pattern="#,###" />
+                        </div>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="stat-card card-orange">
+                        <div class="stat-icon" style="color: #fd7e14;"><i class="bi bi-bar-chart-steps"></i>
+                        </div>
+                        <div class="stat-label">Average Price</div>
+                        <div class="stat-value">$
+                            <fmt:formatNumber value="${avgPrice}" pattern="#,###" />
+                        </div>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="stat-card card-purple">
+                        <div class="stat-icon" style="color: #6f42c1;"><i class="bi bi-cash-stack"></i></div>
+                        <div class="stat-label">Total App Value</div>
+                        <div class="stat-value">$
+                            <fmt:formatNumber value="${sumPrice}" pattern="#,###" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Filters -->
+            <div class="filter-section">
+                <h5 class="fw-bold mb-3"><i class="bi bi-funnel text-primary me-2"></i> Filter Products by Brand
+                </h5>
+                <form action="${pageContext.request.contextPath}/statistics" method="get"
+                      class="row g-3 align-items-end">
+                    <div class="col-md-5">
+                        <label class="form-label text-muted fw-bold small text-uppercase">Select Brand</label>
+                        <select name="brand" class="form-select">
+                            <option value="">-- All Brands --</option>
+                            <c:forEach items="${brands}" var="b">
+                                <option value="${b}" ${b==selectedBrand ? 'selected' : '' }>${b}</option>
+                            </c:forEach>
+                        </select>
+                    </div>
+                    <div class="col-md-5">
+                        <label class="form-label text-muted fw-bold small text-uppercase">Sort Price</label>
+                        <select name="sort" class="form-select">
+                            <option value="desc" ${sort=='desc' ? 'selected' : '' }>Highest Price First</option>
+                            <option value="asc" ${sort=='asc' ? 'selected' : '' }>Lowest Price First</option>
+                        </select>
+                    </div>
+                    <div class="col-md-2">
+                        <button type="submit" class="btn btn-primary w-100 py-2"><i class="bi bi-search"></i>
+                            View</button>
+                    </div>
+                </form>
+            </div>
+
+            <!-- Products Table -->
+            <c:if test="${not empty laptops}">
+                <div class="table-card">
+                    <div class="card-header d-flex justify-content-between align-items-center">
+                        <span><i class="bi bi-laptop text-primary me-2"></i> Products by:
+                            ${selectedBrand}</span>
+                    </div>
+                    <div class="table-responsive">
+                        <table class="table table-hover mb-0 align-middle">
+                            <thead class="table-light text-uppercase text-secondary"
+                                   style="font-size: 0.85rem; letter-spacing: 0.5px;">
+                                <tr>
+                                    <th class="ps-4">ID</th>
+                                    <th>Image</th>
+                                    <th>Product Name</th>
+                                    <th>Price</th>
+                                    <th>CPU</th>
+                                    <th>RAM</th>
+                                    <th>Storage</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <c:forEach items="${laptops}" var="l">
+                                    <tr>
+                                        <td class="ps-4 text-muted fw-bold">#${l.id}</td>
+                                        <td>
+                                            <c:choose>
+                                                <c:when test="${not empty l.image}">
+                                                    <img src="data:image/jpeg;base64,${l.image}"
+                                                         class="product-img" alt="Laptop" />
+                                                </c:when>
+                                                <c:otherwise>
+                                                    <div
+                                                        class="product-img d-flex align-items-center justify-content-center text-muted">
+                                                        <i class="bi bi-image"></i></div>
+                                                    </c:otherwise>
+                                                </c:choose>
+                                        </td>
+                                        <td class="fw-bold">${l.name}</td>
+                                        <td class="price-text">$
+                                            <fmt:formatNumber value="${l.price}" pattern="#,###" />
+                                        </td>
+                                        <td class="text-muted"><i class="bi bi-cpu small me-1"></i> ${l.cpu}
+                                        </td>
+                                        <td class="text-muted"><i class="bi bi-memory small me-1"></i> ${l.ram}
+                                        </td>
+                                        <td class="text-muted"><i class="bi bi-device-hdd small me-1"></i>
+                                            ${l.storage}</td>
+                                    </tr>
+                                </c:forEach>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </c:if>
+
+            <!-- Brand Summary Table -->
+            <div class="table-card mt-4">
+                <div class="card-header d-flex justify-content-between align-items-center">
+                    <span><i class="bi bi-tags text-primary me-2"></i> Inventory Summary by Brand</span>
+                </div>
+                <div class="table-responsive">
+                    <table class="table table-hover mb-0 align-middle">
+                        <thead class="table-light text-uppercase text-secondary"
+                               style="font-size: 0.85rem; letter-spacing: 0.5px;">
                             <tr>
-                                <td>${l.id}</td>
-                                <td>${l.name}</td>
-                                <td class="price-tag">$<fmt:formatNumber value="${l.price}" pattern="#,###"/></td>
-                                <td>${l.cpu}</td>
-                                <td>${l.ram}</td>
-                                <td>${l.storage}</td>
-                                <td><img src="data:image/jpeg;base64,${l.image}"/></td>
+                                <th class="ps-4">Brand</th>
+                                <th>Total Models</th>
+                                <th>Highest Price</th>
+                                <th>Lowest Price</th>
+                                <th>Average Price</th>
                             </tr>
-                        </c:forEach>
-                    </tbody>
-                </table>
+                        </thead>
+                        <tbody>
+                            <c:forEach items="${brandStats}" var="row">
+                                <tr>
+                                    <td class="ps-4"><span class="badge-brand">${row[0]}</span></td>
+                                    <td class="fw-bold">${row[1]}</td>
+                                    <td>$
+                                        <fmt:formatNumber value="${row[2]}" pattern="#,###" />
+                                    </td>
+                                    <td>$
+                                        <fmt:formatNumber value="${row[3]}" pattern="#,###" />
+                                    </td>
+                                    <td>$
+                                        <fmt:formatNumber value="${row[4]}" pattern="#,###" />
+                                    </td>
+                                </tr>
+                            </c:forEach>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- Footer -->
+        <footer>
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-6 mb-4">
+                        <h5 class="footer-brand mb-3"><i
+                                class="bi bi-pc-display-horizontal text-primary me-2"></i>Octatech Laptop Shop
+                        </h5>
+                        <p class="text-muted">Providing premium technology solutions and the best laptops for
+                            every need.</p>
+                    </div>
+                    <div class="col-md-6 mb-4">
+                        <h5 class="fw-bold text-dark">Contact Us</h5>
+                        <ul class="list-unstyled text-muted">
+                            <li class="mb-2"><i class="bi bi-geo-alt-fill text-primary me-2"></i> Address: FPT
+                                University, Hanoi, Vietnam</li>
+                            <li class="mb-2"><i class="bi bi-person-fill text-primary me-2"></i> Leader: Pham
+                                Quoc Anh</li>
+                            <li class="mb-2"><i class="bi bi-telephone-fill text-primary me-2"></i> Phone:
+                                0981583316</li>
+                            <li class="mb-2"><i class="bi bi-envelope-fill text-primary me-2"></i> Email:
+                                team8prj301@gmail.com</li>
+                        </ul>
+                    </div>
+                </div>
+                <hr class="border-secondary opacity-50">
+                <div class="text-center text-muted">
+                    <small>&copy; 2026 Octatech Laptop Shop - Group 8. All Rights Reserved.</small>
+                </div>
+            </div>
+        </footer>
+
+        <!-- Floating Admin Button Configuration from Index -->
+        <c:if test="${sessionScope.user.role == 'ROLE_ADMIN'}">
+            <div class="position-fixed bottom-0 end-0 m-4 z-3 d-flex flex-column align-items-end gap-3">
+                <a href="${pageContext.request.contextPath}/users/manage"
+                   class="btn btn-primary rounded-pill fw-bold shadow-lg px-4">
+                    <i class="bi bi-people-fill me-2"></i> Manage Users
+                </a>
+                <a href="${pageContext.request.contextPath}/laptops/manage"
+                   class="btn btn-success rounded-pill fw-bold shadow-lg px-4">
+                    <i class="bi bi-laptop me-2"></i> Manage Laptops
+                </a>
             </div>
         </c:if>
 
-        <!-- SUMMARY BY BRAND -->
-        <div class="section-title">📊 Summary by Brand</div>
-        <div class="table-wrapper">
-            <table>
-                <thead>
-                    <tr>
-                        <th>Brand</th><th>Count</th>
-                        <th>Highest Price</th><th>Lowest Price</th><th>Average Price</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <c:forEach items="${brandStats}" var="row">
-                        <tr>
-                            <td><span class="brand-badge">${row[0]}</span></td>
-                            <td>${row[1]}</td>
-                            <td class="price-tag">$<fmt:formatNumber value="${row[2]}" pattern="#,###"/></td>
-                            <td>$<fmt:formatNumber value="${row[3]}" pattern="#,###"/></td>
-                            <td>$<fmt:formatNumber value="${row[4]}" pattern="#,###"/></td>
-                        </tr>
-                    </c:forEach>
-                </tbody>
-            </table>
-        </div>
-
-        <a class="back-btn" href="${pageContext.request.contextPath}/">← Back to Home</a>
-
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     </body>
+
 </html>
