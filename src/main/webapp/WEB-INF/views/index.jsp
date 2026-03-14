@@ -145,6 +145,18 @@
                 overflow: hidden;
             }
 
+            /* Clickable product name */
+            a.product-title-link {
+                text-decoration: none;
+                color: inherit;
+                display: block;
+            }
+
+            a.product-title-link:hover .product-title {
+                color: #0d6efd;
+                text-decoration: underline;
+            }
+
             .product-price {
                 font-weight: 800;
                 color: #0dcaf0;
@@ -355,7 +367,9 @@
                                 </div>
                                 <div class="card-body d-flex flex-column">
                                     <div class="text-muted small mb-1">${l.brand}</div>
-                                    <h5 class="product-title">${l.name}</h5>
+                                    <a href="${pageContext.request.contextPath}/laptops/${l.id}" class="product-title-link">
+                                        <h5 class="product-title">${l.name}</h5>
+                                    </a>
                                     <div class="product-price mt-auto">$
                                         <fmt:formatNumber value="${l.price}" pattern="#,###" />
                                     </div>
@@ -405,7 +419,9 @@
                                 </div>
                                 <div class="card-body d-flex flex-column">
                                     <div class="text-muted small mb-1">${l.brand}</div>
-                                    <h5 class="product-title">${l.name}</h5>
+                                    <a href="${pageContext.request.contextPath}/laptops/${l.id}" class="product-title-link">
+                                        <h5 class="product-title">${l.name}</h5>
+                                    </a>
                                     <div class="product-price mt-auto">$
                                         <fmt:formatNumber value="${l.price}" pattern="#,###" />
                                     </div>
@@ -468,7 +484,9 @@
                             </div>
                             <div class="card-body d-flex flex-column">
                                 <div class="text-muted small mb-1">${l.brand}</div>
-                                <h5 class="product-title">${l.name}</h5>
+                                <a href="${pageContext.request.contextPath}/laptops/${l.id}" class="product-title-link">
+                                    <h5 class="product-title">${l.name}</h5>
+                                </a>
                                 <div class="row g-1 mb-2 small text-muted">
                                     <div class="col-6"><i class="bi bi-cpu"></i> ${l.cpu}</div>
                                     <div class="col-6"><i class="bi bi-memory"></i> ${l.ram}</div>
