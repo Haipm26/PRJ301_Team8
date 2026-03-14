@@ -37,10 +37,8 @@ public class User {
     private String name;
     private String phone;
     private String address;
-    @jakarta.persistence.Convert(converter = Utils.GenderEnumConverter.class)
     private GenderEnum gender;
 
-    @jakarta.persistence.Convert(converter = Utils.RoleEnumConverter.class)
     private RoleEnum role; // e.g., "ROLE_ADMIN" or "ROLE_USER"
 
     public Long getId() {

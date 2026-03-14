@@ -139,6 +139,18 @@
                         margin-top: 60px;
                     }
 
+                    /* Clickable similar product name */
+                    a.similar-title-link {
+                        text-decoration: none;
+                        color: inherit;
+                        display: block;
+                    }
+
+                    a.similar-title-link:hover h6 {
+                        color: #0d6efd;
+                        text-decoration: underline;
+                    }
+
                     /* Footer */
                     footer {
                         background-color: #f1f5f9;
@@ -341,7 +353,9 @@
                                             </div>
                                             <div class="card-body d-flex flex-column">
                                                 <div class="text-muted small">${sl.brand}</div>
-                                                <h6 class="fw-bold text-truncate" title="${sl.name}">${sl.name}</h6>
+                                                <a href="${pageContext.request.contextPath}/laptops/${sl.id}" class="similar-title-link">
+                                                    <h6 class="fw-bold text-truncate" title="${sl.name}">${sl.name}</h6>
+                                                </a>
                                                 <div class="text-info fw-bold mb-3">$
                                                     <fmt:formatNumber value="${sl.price}" pattern="#,###" />
                                                 </div>

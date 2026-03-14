@@ -8,13 +8,14 @@ import Model.User;
 import Service.UserService;
 import Utils.RoleEnum;
 import jakarta.servlet.http.HttpSession;
+import java.util.List;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 /**
  *
@@ -69,12 +70,25 @@ public class UserController {
         return "redirect:/users/manage";
     }
     
-    // redirect sang listUser
+    // redirect sang listUser  (with pagination)
     @GetMapping("/users/manage")
-    public String showManageUsers(Model model) {
-        // Fetch all users from database
-        model.addAttribute("users", this.userService.handleGetAllUsers());
-        return "user/listUser"; 
+    public String showManageUsers(
+            @RequestParam(value = "page", defaultValue = "1") int page,
+            @RequestParam(value = "size", defaultValue = "10") int size,
+            Model model) {
+        List<User> allUsers = this.userService.handleGetAllUsers();
+        int totalUsers  = allUsers.size();
+        int totalPages  = (int) Math.ceil((double) totalUsers / size);
+        if (page < 1) page = 1;
+        if (page > totalPages && totalPages > 0) page = totalPages;
+        int fromIndex = (page - 1) * size;
+        int toIndex   = Math.min(fromIndex + size, totalUsers);
+        List<User> pagedUsers = (totalUsers == 0) ? allUsers : allUsers.subList(fromIndex, toIndex);
+        model.addAttribute("users",       pagedUsers);
+        model.addAttribute("currentPage", page);
+        model.addAttribute("totalPages",  totalPages);
+        model.addAttribute("pageSize",    size);
+        return "user/listUser";
     }
 
     // Promote User to ADMIN
@@ -119,5 +133,55 @@ public class UserController {
         // 3. Send the user object to the JSP
         model.addAttribute("userProfile", currentUser);
         return "user/profileUser"; // Path: /WEB-INF/views/user/profileUser.jsp
+    }
+    
+    
+    // 1. Show the self-update page
+    @GetMapping("/profile/edit")
+    public String showSelfUpdatePage(HttpSession session, Model model) {
+        User currentUser = (User) session.getAttribute("user");
+        if (currentUser == null) {
+            return "redirect:/login";
+        }
+
+        // Protection check for master account
+        if ("ADMIN".equalsIgnoreCase(currentUser.getUsername())) {
+            return "redirect:/profile?error=protected";
+        }
+
+        model.addAttribute("user", currentUser);
+        return "user/self-update"; 
+    }
+
+    // 2. Handle the self-update logic
+    @PostMapping("/profile/update")
+    public String handleSelfUpdate(@ModelAttribute("user") User updateData, HttpSession session, Model model) {
+        User currentUser = (User) session.getAttribute("user");
+        
+        String phoneRegex = "^0[0-9]{9}$";
+        if (updateData.getPhone() != null && !updateData.getPhone().matches(phoneRegex)) {
+            model.addAttribute("error", "Invalid phone number! It must be 10 digits starting with 0.");
+            model.addAttribute("user", updateData); 
+            return "user/self-update";
+        }
+        
+        // Security: Block master account and ensure user only updates themselves
+        if (currentUser == null || "ADMIN".equalsIgnoreCase(currentUser.getUsername())) {
+            return "redirect:/profile";
+        }
+
+        // Map allowed fields from the form to the session user
+        currentUser.setName(updateData.getName());
+        currentUser.setPhone(updateData.getPhone());
+        currentUser.setAddress(updateData.getAddress());
+        currentUser.setGender(updateData.getGender());
+
+        // Save to Database
+        this.userService.handleUpdateUser(currentUser);
+
+        // Sync the session so the UI updates (name in navbar, etc.)
+        session.setAttribute("user", currentUser);
+
+        return "redirect:/profile";
     }
 }

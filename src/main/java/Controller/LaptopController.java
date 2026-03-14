@@ -8,6 +8,7 @@ import Model.Laptop;
 import Service.LaptopService;
 import java.io.IOException;
 import java.util.Base64;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.springframework.stereotype.Controller;
@@ -33,9 +34,22 @@ public class LaptopController {
     }
 
     @GetMapping("/laptops/manage")
-    public String getManagePage(Model model) {
-        java.util.List<Laptop> laptops = this.laptopService.handleGetAllLaptops();
-        model.addAttribute("laptops", laptops);
+    public String getManagePage(
+            @RequestParam(value = "page", defaultValue = "1") int page,
+            @RequestParam(value = "size", defaultValue = "10") int size,
+            Model model) {
+        List<Laptop> allLaptops = this.laptopService.handleGetAllLaptops();
+        int totalLaptops = allLaptops.size();
+        int totalPages   = (int) Math.ceil((double) totalLaptops / size);
+        if (page < 1) page = 1;
+        if (page > totalPages && totalPages > 0) page = totalPages;
+        int fromIndex = (page - 1) * size;
+        int toIndex   = Math.min(fromIndex + size, totalLaptops);
+        List<Laptop> pagedLaptops = (totalLaptops == 0) ? allLaptops : allLaptops.subList(fromIndex, toIndex);
+        model.addAttribute("laptops",     pagedLaptops);
+        model.addAttribute("currentPage", page);
+        model.addAttribute("totalPages",  totalPages);
+        model.addAttribute("pageSize",    size);
         return "manageLaptops";
     }
 

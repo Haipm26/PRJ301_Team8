@@ -13,5 +13,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
  * @author Pham Minh Hai
  */
 public interface UserRepository extends JpaRepository<User, Long> {
-    User findFirstByUsername(String username);
+    User findByUsername(String username);
 }
+
