@@ -81,8 +81,14 @@ public class AuthController {
     }
 
     @PostMapping("/register")
-    public String handleRegister(@ModelAttribute("newUser") User user) {
+    public String handleRegister(@ModelAttribute("newUser") User user, Model model) {
         // Set default role for new sign-ups
+        
+       if (this.userService.findByUsername(user.getUsername()) != null){
+           model.addAttribute("errorText", "Username have been used");
+           return "user/register";
+       } 
+        
         user.setRole(RoleEnum.ROLE_USER);
 
         // Save to DB via service
@@ -117,6 +123,11 @@ public class AuthController {
             Model model) {
         User currentUser = (User) session.getAttribute("user");
 
+        if (currentUser != null && "ADMIN".equalsIgnoreCase(currentUser.getUsername())) {
+            model.addAttribute("error", "The master ADMIN account is protected and its password cannot be changed.");
+            return "user/change-password";
+        }
+        
         // 1. Check if passwords match
         if (!newPassword.equals(confirmPassword)) {
             model.addAttribute("error", "New passwords do not match!");

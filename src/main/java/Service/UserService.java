@@ -44,6 +44,10 @@ public class UserService {
         this.userRepository.save(user);
     }
     
+    public User findByUsername(String username){
+        return this.userRepository.findByUsername(username);
+    }
+    
     public User handleLogin(String username, String password) {
     // Find by username using the repository we discussed
         User user = this.userRepository.findByUsername(username);

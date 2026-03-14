@@ -238,11 +238,7 @@
                                     </td>
                                     <td>
                                         <div class="d-flex justify-content-center gap-2">
-                                            <a href="${pageContext.request.contextPath}/users/update/${u.id}"
-                                               class="btn btn-sm btn-outline-primary rounded-pill px-3"
-                                               title="Edit User">
-                                                <i class="bi bi-pencil-fill"></i> Edit
-                                            </a>
+                                            
 
                                             <c:if test="${u.username != 'ADMIN'}">
                                                 <c:choose>
@@ -261,7 +257,13 @@
                                                         </a>
                                                     </c:otherwise>
                                                 </c:choose>
-
+                                                
+                                                <a href="${pageContext.request.contextPath}/users/update/${u.id}"
+                                                    class="btn btn-sm btn-outline-primary rounded-pill px-3"
+                                                    title="Edit User">
+                                                     <i class="bi bi-pencil-fill"></i> Edit
+                                                 </a>
+                                                
                                                 <a href="${pageContext.request.contextPath}/users/delete/${u.id}"
                                                    onclick="return confirm('Are you sure you want to completely delete user ${u.username}?')"
                                                    class="btn btn-sm btn-outline-danger rounded-pill px-3"

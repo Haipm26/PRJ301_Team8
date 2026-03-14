@@ -22,6 +22,16 @@
                         font-family: 'Inter', sans-serif;
                         background-color: #f8f9fa;
                     }
+                    
+                    .navbar-custom {
+                        z-index: 1030 !important; /* Higher than Bootstrap's default sticky-top (1020) */
+                    }
+
+                    /* 2. Adjust the sidebar to sit below the navbar when scrolling */
+                    .summary-card.sticky-top {
+                        top: 90px !important; /* Adjust this value if your navbar height changes */
+                        z-index: 1010; /* Lower than the navbar */
+                    }
 
                     .navbar-custom {
                         background-color: #ffffff;
@@ -383,11 +393,22 @@
 
                 <!-- Floating Admin Button -->
                 <c:if test="${sessionScope.user.role == 'ROLE_ADMIN'}">
-                    <a href="${pageContext.request.contextPath}/laptops/manage"
-                        class="btn btn-success rounded-pill fw-bold shadow-lg position-fixed bottom-0 end-0 m-4 z-3"
-                        style="font-family: 'Poppins', sans-serif;">
-                        <i class="bi bi-gear-fill me-2"></i> Manage Laptops
-                    </a>
+                    <%-- Fixed container in the bottom-right corner --%>
+                    <div class="position-fixed bottom-0 end-0 m-4 z-3 d-flex flex-column align-items-end gap-3">
+
+                        <%-- Top Button: Manage Users --%>
+                        <a href="${pageContext.request.contextPath}/users/manage"
+                           class="btn btn-primary rounded-pill fw-bold shadow-lg px-4">
+                            <i class="bi bi-people-fill me-2"></i> Manage Users
+                        </a>
+
+                        <%-- Bottom Button: Manage Laptops --%>
+                        <a href="${pageContext.request.contextPath}/laptops/manage"
+                           class="btn btn-success rounded-pill fw-bold shadow-lg px-4">
+                            <i class="bi bi-laptop me-2"></i> Manage Laptops
+                        </a>
+
+                    </div>
                 </c:if>
 
                 <!-- Bootstrap 5 JS Bundle -->

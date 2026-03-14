@@ -157,6 +157,17 @@
                         <p class="mb-0 text-white-50">Create your new account today</p>
                     </div>
                     <div class="auth-body">
+                        
+                        <c:if test="${not empty errorText}">
+                            <div class="alert alert-danger alert-dismissible fade show rounded-3 mb-4" role="alert">
+                                <div class="d-flex align-items-center">
+                                    <i class="bi bi-exclamation-circle-fill fs-5 me-2"></i>
+                                    <span>${errorText}</span>
+                                </div>
+                                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                            </div>
+                        </c:if>
+                        
                         <form action="${pageContext.request.contextPath}/register" method="post">
 
                             <div class="row g-3">
@@ -177,15 +188,20 @@
                             <div class="mb-3">
                                 <label class="form-label fw-bold text-secondary text-uppercase"
                                        style="font-size: 0.8rem;">Full Name</label>
-                                <input type="text" class="form-control" name="name" placeholder="John Doe">
+                                       <input type="text" class="form-control" name="name" placeholder="John Doe" required="">
                             </div>
 
                             <div class="row g-3">
                                 <div class="col-md-6 mb-3">
                                     <label class="form-label fw-bold text-secondary text-uppercase"
                                            style="font-size: 0.8rem;">Phone</label>
-                                    <input type="text" class="form-control" name="phone"
-                                           placeholder="Contact number">
+                                    <input type="text" 
+                                               class="form-control" 
+                                               name="phone" 
+                                               placeholder="Contact number"
+                                               required
+                                               pattern="0[0-9]{9}" 
+                                               title="Phone number must start with 0 and have 10 digits." />
                                 </div>
                                 <div class="col-md-6 mb-3">
                                     <label class="form-label fw-bold text-secondary text-uppercase"
@@ -202,7 +218,7 @@
                                 <label class="form-label fw-bold text-secondary text-uppercase"
                                        style="font-size: 0.8rem;">Address</label>
                                 <textarea class="form-control" name="address" rows="2"
-                                          placeholder="Your shipping address"></textarea>
+                                          placeholder="Your shipping address" required=""></textarea>
                             </div>
 
                             <button type="submit" class="btn btn-auth w-100 mb-4 shadow"><i

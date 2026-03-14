@@ -120,4 +120,54 @@ public class UserController {
         model.addAttribute("userProfile", currentUser);
         return "user/profileUser"; // Path: /WEB-INF/views/user/profileUser.jsp
     }
+    
+    
+    // 1. Show the self-update page
+    @GetMapping("/profile/edit")
+    public String showSelfUpdatePage(HttpSession session, Model model) {
+        User currentUser = (User) session.getAttribute("user");
+        if (currentUser == null) {
+            return "redirect:/login";
+        }
+
+        // Protection check for master account
+        if ("ADMIN".equalsIgnoreCase(currentUser.getUsername())) {
+            return "redirect:/profile?error=protected";
+        }
+
+        model.addAttribute("user", currentUser);
+        return "user/self-update"; 
+    }
+
+    // 2. Handle the self-update logic
+    @PostMapping("/profile/update")
+    public String handleSelfUpdate(@ModelAttribute("user") User updateData, HttpSession session, Model model) {
+        User currentUser = (User) session.getAttribute("user");
+        
+        String phoneRegex = "^0[0-9]{9}$";
+        if (updateData.getPhone() != null && !updateData.getPhone().matches(phoneRegex)) {
+            model.addAttribute("error", "Invalid phone number! It must be 10 digits starting with 0.");
+            model.addAttribute("user", updateData); 
+            return "user/self-update";
+        }
+        
+        // Security: Block master account and ensure user only updates themselves
+        if (currentUser == null || "ADMIN".equalsIgnoreCase(currentUser.getUsername())) {
+            return "redirect:/profile";
+        }
+
+        // Map allowed fields from the form to the session user
+        currentUser.setName(updateData.getName());
+        currentUser.setPhone(updateData.getPhone());
+        currentUser.setAddress(updateData.getAddress());
+        currentUser.setGender(updateData.getGender());
+
+        // Save to Database
+        this.userService.handleUpdateUser(currentUser);
+
+        // Sync the session so the UI updates (name in navbar, etc.)
+        session.setAttribute("user", currentUser);
+
+        return "redirect:/profile";
+    }
 }

@@ -1,3 +1,9 @@
+<%-- 
+    Document   : self-update
+    Created on : Mar 14, 2026, 5:17:38 PM
+    Author     : Pham Minh Hai
+--%>
+
 <%@page contentType="text/html" pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="jakarta.tags.core" %>
 <!DOCTYPE html>
@@ -198,9 +204,9 @@
         <div class="container my-5 flex-grow-1 d-flex align-items-center justify-content-center">
             <div class="col-md-8 col-lg-7 text-start">
 
-                <a href="${pageContext.request.contextPath}/users/manage"
+                <a href="${pageContext.request.contextPath}/profile"
                    class="btn btn-sm btn-outline-secondary rounded-pill mb-4 px-3">
-                    <i class="bi bi-arrow-left me-1"></i> Back to User List
+                    <i class="bi bi-arrow-left me-1"></i> Back to Profile
                 </a>
 
                 <div class="card admin-card">
@@ -211,7 +217,18 @@
                     </div>
 
                     <div class="admin-body">
-                        <form action="${pageContext.request.contextPath}/users/update" method="post">
+                        
+                        <c:if test="${not empty error}">
+                            <div class="alert alert-danger alert-dismissible fade show rounded-3 mb-4" role="alert">
+                                <div class="d-flex align-items-center">
+                                    <i class="bi bi-exclamation-circle-fill fs-5 me-2"></i>
+                                    <span>${error}</span>
+                                </div>
+                                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                            </div>
+                        </c:if>
+                        
+                        <form action="${pageContext.request.contextPath}/profile/update" method="post">
 
                             <input type="hidden" name="id" value="${user.id}" />
                             <input type="hidden" name="password" value="${user.password}" />
@@ -236,10 +253,18 @@
                                     </div>
 
                                     <div class="mb-3">
-                                        <label class="form-label fw-bold text-secondary text-uppercase"
-                                               style="font-size: 0.8rem;">Contact Phone</label>
-                                        <input type="text" class="form-control" name="phone" value="${user.phone}"
-                                               placeholder="Phone number" required/>
+                                        <label class="form-label fw-bold text-secondary text-uppercase" style="font-size: 0.8rem;">
+                                            Contact Phone
+                                        </label>
+                                        <input type="text" 
+                                               class="form-control" 
+                                               name="phone" 
+                                               value="${user.phone}"
+                                               placeholder="e.g., 0123456789"
+                                               required
+                                               pattern="0[0-9]{9}" 
+                                               title="Phone number must start with 0 and have 10 digits." />
+                                        <div class="form-text text-muted">Example: 0912345678</div>
                                     </div>
                                 </div>
 
@@ -265,26 +290,13 @@
                                         </select>
                                     </div>
 
-                                    <div class="mb-3">
-                                        <label class="form-label fw-bold text-secondary text-uppercase"
-                                               style="font-size: 0.8rem;">System Role</label>
-                                        <select class="form-select" name="role">
-                                            <option value="ROLE_USER" ${user.role=='ROLE_USER' ? 'selected' : '' }>
-                                                User</option>
-                                            <option value="ROLE_ADMIN" ${user.role=='ROLE_ADMIN' ? 'selected' : ''
-                                                    }>Admin</option>
-                                        </select>
-                                        <div class="form-text text-danger small"><i
-                                                class="bi bi-exclamation-triangle"></i> Warning: Changing role
-                                            grants broad access.</div>
-                                    </div>
                                 </div>
                             </div>
 
                             <hr class="my-4 border-light">
 
                             <div class="d-flex gap-3 justify-content-end mt-4">
-                                <a href="${pageContext.request.contextPath}/users/manage"
+                                <a href="${pageContext.request.contextPath}/profile"
                                    class="btn btn-light btn-action text-secondary border px-4">Cancel</a>
                                 <button type="submit" class="btn btn-primary btn-action px-5 shadow"><i
                                         class="bi bi-floppy-fill me-2"></i> Save Changes</button>

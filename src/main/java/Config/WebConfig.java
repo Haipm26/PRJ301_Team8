@@ -62,8 +62,15 @@ public class WebConfig implements WebMvcConfigurer {
                         "/users/delete/**",
                         "/users/update/**",
                         "/users/promote/**",
-                        "/users/demote/**"
+                        "/users/demote/**",
+                        "/statistics/**"
                 );
+        
+        registry.addInterceptor(new GuestInterceptor())
+            .addPathPatterns(
+                    "/login", 
+                    "/register"
+            );
     }
 
     

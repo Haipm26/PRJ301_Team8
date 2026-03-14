@@ -364,10 +364,10 @@
         </div>
 
         <!-- Floating Admin Button -->
-        <a href="${pageContext.request.contextPath}/laptops/manage"
+        <a href="${pageContext.request.contextPath}/users/manage"
            class="btn btn-success rounded-pill fw-bold shadow-lg position-fixed bottom-0 end-0 m-4 z-3"
            style="font-family: 'Poppins', sans-serif;">
-            <i class="bi bi-gear-fill me-2"></i> Manage Laptops
+            <i class="bi bi-people-fill me-2"></i> Manage Users
         </a>
 
         <!-- Footer -->

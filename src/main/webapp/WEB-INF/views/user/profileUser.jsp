@@ -259,10 +259,19 @@
                             </div>
 
                             <div class="mt-4 pt-3 d-flex justify-content-center gap-3 border-top">
+                                
+                                <c:if test="${userProfile.username != 'ADMIN'}">
+                                    <a href="${pageContext.request.contextPath}/profile/edit"
+                                       class="btn btn-primary rounded-pill px-4 fw-bold">
+                                        <i class="bi bi-pencil-square me-1"></i> Edit Profile
+                                    </a>
+                                </c:if>
+                                
                                 <a href="${pageContext.request.contextPath}/change-password"
                                    class="btn btn-outline-primary rounded-pill px-4 fw-bold">
                                     <i class="bi bi-key-fill me-1"></i> Change Password
                                 </a>
+                                
                             </div>
                         </div>
                     </div>

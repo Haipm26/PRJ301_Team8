@@ -24,7 +24,7 @@ public class AdminInterceptor implements HandlerInterceptor {
                              HttpServletResponse response,
                              Object handler) throws Exception {
 
-        HttpSession session = request.getSession(false);
+        HttpSession session = request.getSession();
 
         if (session == null) {
             response.sendRedirect("/login");
@@ -34,7 +34,7 @@ public class AdminInterceptor implements HandlerInterceptor {
         User user = (User) session.getAttribute("user");
 
         if (user == null || user.getRole() != RoleEnum.ROLE_ADMIN) {
-            response.sendRedirect("/");
+            response.sendRedirect(request.getContextPath() + "/");
             return false;
         }
 
