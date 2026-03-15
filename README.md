@@ -104,7 +104,9 @@ Nhóm 8 – SE2014
 
 Phạm Quốc Anh – Team Leader
 
-(Các thành viên khác)
+Phạm Minh Hải
+
+Đặng Đức Dương
 
 Giảng viên hướng dẫn: Nguyễn Thị Oanh
 
