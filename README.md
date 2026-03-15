@@ -1,89 +1,103 @@
-OCTATECH Laptop Shop
+OCTATECH Laptop Shop – E-commerce Web Application
 
-OCTATECH Laptop Shop là một website bán laptop trực tuyến được phát triển trong môn PRJ301 – Java Web Application Development tại FPT University.
+OCTATECH Laptop Shop is a web-based e-commerce platform developed for the PRJ301 – Java Web Application Development course at FPT University.
 
-Hệ thống cho phép người dùng tìm kiếm, xem thông tin và đặt mua các sản phẩm laptop một cách thuận tiện thông qua giao diện web thân thiện.
+The system allows users to browse, search, and purchase laptop products online. It also provides administrative features to manage products, users, and orders efficiently.
 
-Giới thiệu dự án
+The project follows the MVC (Model – View – Controller) architecture and demonstrates core Java Web development concepts such as authentication, CRUD operations, session management, and database integration.
 
-Mục tiêu của dự án là xây dựng một hệ thống E-commerce đơn giản sử dụng Java Web (Servlet/JSP) theo mô hình MVC, giúp sinh viên áp dụng các kiến thức về:
+Table of Contents
 
-Java Servlet & JSP
+Technologies Used
 
-MVC Architecture
+Installation
 
-SQL Server Database
+Usage
 
-Session & Authentication
+Database Setup
 
-CRUD operations
+Contributing
 
-Pagination và Search
+License
 
-Website mô phỏng một cửa hàng bán laptop trực tuyến với các chức năng cơ bản dành cho người dùng và quản trị viên.
+Technologies Used
+Backend
 
-Các chức năng chính
-Người dùng (User)
+Java
 
-Đăng ký tài khoản
+JSP
 
-Đăng nhập / đăng xuất
-
-Xem danh sách laptop
-
-Tìm kiếm sản phẩm
-
-Xem chi tiết sản phẩm
-
-Thêm sản phẩm vào giỏ hàng
-
-Đặt hàng (Checkout)
-
-Xem và cập nhật thông tin cá nhân
-
-Xem lịch sử đơn hàng
-
-Quản trị viên (Admin)
-
-Quản lý sản phẩm laptop (CRUD)
-
-Quản lý người dùng
-
-Quản lý đơn hàng
-
-Xem thống kê hệ thống
-
-Công nghệ sử dụng
-
-Java Servlet / JSP
+Servlet
 
 JDBC
 
-SQL Server
+Frontend
 
-HTML / CSS / Bootstrap
+HTML
+
+CSS
+
+JavaScript
+
+Bootstrap
+
+Database
+
+Microsoft SQL Server
+
+Web Server
 
 Apache Tomcat
 
+Development Tools
+
 NetBeans IDE
 
-Hệ thống được xây dựng theo mô hình:
+JDK 8 / JDK 11
 
-MVC Architecture
+Architecture
 
-Model: xử lý dữ liệu và kết nối database
+MVC (Model – View – Controller)
 
-View: các trang JSP hiển thị giao diện
+Installation
 
-Controller: các Servlet xử lý logic và request
+To run the OCTATECH Laptop Shop project locally, follow these steps:
 
-Cơ sở dữ liệu
+Setup Your Environment
 
-Database sử dụng:
+Install the following software:
+
+JDK 8 or higher
+
+Apache Tomcat
+
+Microsoft SQL Server
+
+NetBeans IDE (recommended)
+
+Libraries Required
+
+Ensure the following libraries are included in the project:
+
+sqljdbc.jar (SQL Server JDBC Driver)
+
+jstl.jar
+
+standard.jar
+
+These libraries are usually located in the WEB-INF/lib folder.
+
+Configure the Database
+Create Database
+
+Create a new database in SQL Server:
 
 LaptopShopDB
+Run SQL Scripts
 
-Bao gồm các bảng chính:
+Run the provided SQL script to create tables and sample data.
+
+Tables included in the system:
 
 Users
 
@@ -93,29 +107,77 @@ Orders
 
 OrderDetails
 
-Quan hệ dữ liệu:
+Database Relationships
+Users (1) ------ (N) Orders
+Orders (1) ----- (N) OrderDetails
+Laptops (1) ---- (N) OrderDetails
+Configure Database Connection
 
-Users 1 --- N Orders
-Orders 1 --- N OrderDetails
-Laptops 1 --- N OrderDetails
-Thành viên nhóm
+Open the database connection file (for example DBContext.java) and update the connection settings:
 
-Nhóm 8 – SE2014
+jdbc:sqlserver://localhost:1433;databaseName=LaptopShopDB
+username: sa
+password: your_password
 
-Phạm Quốc Anh – Team Leader
+Make sure the credentials match your SQL Server configuration.
 
-Phạm Minh Hải
+Build and Deploy the Project
 
-Đặng Đức Dương
+Open the project in NetBeans IDE
 
-Giảng viên hướng dẫn: Nguyễn Thị Oanh
+Build the project
 
-Mục đích học tập
+Deploy the project to Apache Tomcat
 
-Dự án được thực hiện nhằm:
+Start the Tomcat server
 
-Áp dụng kiến thức Java Web
+Access the Application
 
-Thực hành làm việc nhóm
+After deployment, open your browser and access:
 
-Xây dựng một hệ thống web hoàn chỉnh từ phân tích → thiết kế → triển khai → kiểm thử
+http://localhost:8080/LaptopStore
+Usage
+For Customers
+
+Users can perform the following actions:
+
+Register a new account
+
+Login / Logout
+
+Browse laptop products
+
+Search for laptops
+
+View product details
+
+Add products to cart
+
+Checkout and place orders
+
+Manage personal profile
+
+For Admins
+
+Administrators have additional management features:
+
+Manage laptop products (Add / Edit / Delete)
+
+Manage users
+
+Manage orders
+
+View system statistics and dashboard
+
+Database Setup
+SQL Server Setup
+
+Open SQL Server Management Studio
+
+Create database:
+
+LaptopShopDB
+
+Run SQL scripts to create tables and insert sample data.
+
+Ensure the database connection in the project is correctly configured.
