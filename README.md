@@ -1,183 +1,123 @@
-OCTATECH Laptop Shop – E-commerce Web Application
+<h1 align="center">💻 OCTATECH Laptop Shop</h1>
+<h3 align="center">E-commerce Web Application</h3>
 
-OCTATECH Laptop Shop is a web-based e-commerce platform developed for the PRJ301 – Java Web Application Development course at FPT University.
+<p align="center">
+  <img src="https://img.shields.io/badge/Java-Web%20Application-orange?style=for-the-badge&logo=java"/>
+  <img src="https://img.shields.io/badge/Architecture-MVC-blue?style=for-the-badge"/>
+  <img src="https://img.shields.io/badge/Database-SQL%20Server-red?style=for-the-badge"/>
+  <img src="https://img.shields.io/badge/Server-Tomcat-lightgrey?style=for-the-badge"/>
+  <img src="https://img.shields.io/badge/Status-Completed-brightgreen?style=for-the-badge"/>
+</p>
 
-The system allows users to browse, search, and purchase laptop products online. It also provides administrative features to manage products, users, and orders efficiently.
+---
 
-The project follows the MVC (Model – View – Controller) architecture and demonstrates core Java Web development concepts such as authentication, CRUD operations, session management, and database integration.
+## 📌 Overview
 
-Table of Contents
+**OCTATECH Laptop Shop** is a web-based e-commerce platform developed for the **PRJ301 – Java Web Application Development** course at FPT University.
 
-Technologies Used
+The system allows users to **browse, search, and purchase laptop products online**, while administrators can manage products, users, and orders efficiently.
 
-Installation
+✨ Built with:
+- MVC (Model – View – Controller)
+- Authentication & Authorization
+- CRUD Operations
+- Session Management
+- Database Integration
 
-Usage
+---
 
-Database Setup
+## 👨‍🏫 Instructor
 
-Contributing
+- 🎓 **Nguyễn Thị Oanh**
 
-License
+---
 
-Technologies Used
-Backend
+## 👨‍💻 Team Members
 
-Java
+- 👑 **Phạm Quốc Anh** – Leader  
+- ⚙️ **Phạm Minh Hải** – Backend Engineer  
+- 🎨 **Đặng Đức Dương** – Frontend Engineer  
 
-JSP
+---
 
-Servlet
+## 🧠 Technologies Used
 
-JDBC
+### 🔧 Backend
+- Java
+- JSP
+- Servlet
+- JDBC
 
-Frontend
+### 🎨 Frontend
+- HTML
+- CSS
+- JavaScript
+- Bootstrap
 
-HTML
+### 🗄️ Database
+- Microsoft SQL Server
 
-CSS
+### 🌐 Web Server
+- Apache Tomcat
 
-JavaScript
+### 🛠️ Tools
+- NetBeans IDE
+- JDK 8 / JDK 11
 
-Bootstrap
+---
 
-Database
+## 🏗️ Architecture
 
-Microsoft SQL Server
+<p align="center">
+  <img src="https://img.shields.io/badge/MVC-Model--View--Controller-blueviolet?style=for-the-badge"/>
+</p>
 
-Web Server
+---
 
-Apache Tomcat
+## 📊 System Features
 
-Development Tools
+### 👤 Customer Features
+- Register / Login / Logout
+- Browse laptop products
+- Search products
+- View product details
+- Add to cart
+- Checkout & place orders
+- Manage profile
 
-NetBeans IDE
+### 🛠️ Admin Features
+- Manage products (Add / Edit / Delete)
+- Manage users
+- Manage orders
+- View dashboard & statistics
 
-JDK 8 / JDK 11
+---
 
-Architecture
+## ⚙️ Installation Guide
 
-MVC (Model – View – Controller)
+### 🔹 1. Setup Environment
 
-Installation
+Install required tools:
 
-To run the OCTATECH Laptop Shop project locally, follow these steps:
+- JDK 8+
+- Apache Tomcat
+- Microsoft SQL Server
+- NetBeans IDE
 
-Setup Your Environment
+---
 
-Install the following software:
+### 🔹 2. Required Libraries
 
-JDK 8 or higher
+Place in `WEB-INF/lib`:
 
-Apache Tomcat
+- `sqljdbc.jar`
+- `jstl.jar`
+- `standard.jar`
 
-Microsoft SQL Server
+---
 
-NetBeans IDE (recommended)
+### 🔹 3. Database Setup
 
-Libraries Required
-
-Ensure the following libraries are included in the project:
-
-sqljdbc.jar (SQL Server JDBC Driver)
-
-jstl.jar
-
-standard.jar
-
-These libraries are usually located in the WEB-INF/lib folder.
-
-Configure the Database
-Create Database
-
-Create a new database in SQL Server:
-
-LaptopShopDB
-Run SQL Scripts
-
-Run the provided SQL script to create tables and sample data.
-
-Tables included in the system:
-
-Users
-
-Laptops
-
-Orders
-
-OrderDetails
-
-Database Relationships
-Users (1) ------ (N) Orders
-Orders (1) ----- (N) OrderDetails
-Laptops (1) ---- (N) OrderDetails
-Configure Database Connection
-
-Open the database connection file (for example DBContext.java) and update the connection settings:
-
-jdbc:sqlserver://localhost:1433;databaseName=LaptopShopDB
-username: sa
-password: your_password
-
-Make sure the credentials match your SQL Server configuration.
-
-Build and Deploy the Project
-
-Open the project in NetBeans IDE
-
-Build the project
-
-Deploy the project to Apache Tomcat
-
-Start the Tomcat server
-
-Access the Application
-
-After deployment, open your browser and access:
-
-http://localhost:8080/LaptopStore
-Usage
-For Customers
-
-Users can perform the following actions:
-
-Register a new account
-
-Login / Logout
-
-Browse laptop products
-
-Search for laptops
-
-View product details
-
-Add products to cart
-
-Checkout and place orders
-
-Manage personal profile
-
-For Admins
-
-Administrators have additional management features:
-
-Manage laptop products (Add / Edit / Delete)
-
-Manage users
-
-Manage orders
-
-View system statistics and dashboard
-
-Database Setup
-SQL Server Setup
-
-Open SQL Server Management Studio
-
-Create database:
-
-LaptopShopDB
-
-Run SQL scripts to create tables and insert sample data.
-
-Ensure the database connection in the project is correctly configured.
+#### Create Database
+```sql
+CREATE DATABASE LaptopShopDB;
