@@ -18,7 +18,7 @@
 The system allows users to **browse, search, and purchase laptop products online**, while administrators can manage products, users, and orders efficiently.
 
 ✨ Built with:
-- MVC (Model – View – Controller)
+- Spring MVC (Model – View – Controller)
 - Authentication & Authorization
 - CRUD Operations
 - Session Management
@@ -43,6 +43,7 @@ The system allows users to **browse, search, and purchase laptop products online
 ## 🧠 Technologies Used
 
 ### 🔧 Backend
+- Spring MVC
 - Java
 - JSP
 - Servlet
