@@ -3,7 +3,7 @@
 
 <p align="center">
   <img src="https://img.shields.io/badge/Java-Web%20Application-orange?style=for-the-badge&logo=java"/>
-  <img src="https://img.shields.io/badge/Architecture-MVC-blue?style=for-the-badge"/>
+  <img src="https://img.shields.io/badge/Architecture-Spring%20MVC-blue?style=for-the-badge"/>
   <img src="https://img.shields.io/badge/Database-SQL%20Server-red?style=for-the-badge"/>
   <img src="https://img.shields.io/badge/Server-Tomcat-lightgrey?style=for-the-badge"/>
   <img src="https://img.shields.io/badge/Status-Completed-brightgreen?style=for-the-badge"/>
